@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { UserSchema } from "../../utils/zodSchema";
-import conn from "../mongodb/conn";
-import UserModel from "../mongodb/models/UserModel";
+import conn from "../db/conn";
+import UserModel from "../db/models/UserModel";
 import { disconnect } from "mongoose";
 
 const postUserArgSchema = UserSchema;
