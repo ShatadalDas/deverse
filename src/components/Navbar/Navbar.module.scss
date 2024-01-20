@@ -1,0 +1,97 @@
+.navbar {
+  --_bg-clr: #1e1e1e;
+
+  --logo-size: 1.3rem;
+  --link-size: 0.9rem;
+  --link-gap: 2vw;
+
+  @media (30em < width <= 70em) {
+    --logo-size: 1rem;
+    --link-size: 0.7rem;
+  }
+  @media (width <= 30em) {
+    --logo-size: 0.8rem;
+    --link-size: 0.5rem;
+  }
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--_bg-clr);
+  padding: 0.35rem min(2vw, 0.8rem);
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.logoImage {
+  height: var(--logo-size);
+  width: auto;
+}
+
+.logoText {
+  font-size: var(--logo-size);
+  font-weight: bolder;
+  font-family: var(--libre-franklin), sans-serif;
+  background-image: linear-gradient(106deg, #20f3e3 11.04%, #3161ebe3 81.71%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.linkWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--link-gap);
+  li,
+  a {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.linkText {
+  font-weight: 700;
+  font-size: var(--link-size);
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.defaultProfileLogo {
+  --_size: calc(var(--link-size) * 1.4);
+
+  height: var(--_size);
+  width: var(--_size);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.linkActive {
+  opacity: 1;
+  // position: relative;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: -5%;
+  //   height: 0.1em;
+  //   width: 100%;
+  //   background-color: #fff;
+  //   scale: 0;
+  //   transform-origin: center;
+  //   animation: grow 100ms forwards;
+  // }
+}
+
+// @keyframes grow {
+//   to {
+//     scale: 1;
+//   }
+// }
+
+.profileActive {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px #fff);
+}
