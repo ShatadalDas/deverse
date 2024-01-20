@@ -1,7 +1,7 @@
 ***Note*: For any contribution, kindly refer to *[this gist](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)* before doing any commit**
 
 # To Contribute
-- Clone the repo
+- Fork the repo
 - Make changes in the cloned version
 - Create pull request
 
