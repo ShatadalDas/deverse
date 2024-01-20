@@ -6,19 +6,19 @@
   --link-gap: 2vw;
 
   @media (30em < width <= 70em) {
-    --logo-size: 1rem;
-    --link-size: 0.7rem;
+    --logo-size: 1.1rem;
+    --link-size: 0.8rem;
   }
   @media (width <= 30em) {
-    --logo-size: 0.8rem;
-    --link-size: 0.5rem;
+    --logo-size: 0.9rem;
+    --link-size: 0.7rem;
   }
 
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--_bg-clr);
-  padding: 0.35rem min(2vw, 0.8rem);
+  padding: 0.5rem min(2vw, 0.8rem);
 }
 
 .logoWrapper {
