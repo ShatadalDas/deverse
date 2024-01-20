@@ -11,7 +11,7 @@ function Navbar() {
   const pathname = usePathname()
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logoWrapper}>
+      <h1 className={styles.logoWrapper}>
         <Image
           className={styles.logoImage}
           src="/logo.webp"
@@ -21,7 +21,7 @@ function Navbar() {
           priority
         />
         <p className={styles.logoText}>Deverse</p>
-      </div>
+      </h1>
       <ul className={styles.linkWrapper}>
         {links.map((link, i) => {
           if (link === "explore") {
