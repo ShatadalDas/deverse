@@ -1,0 +1,45 @@
+.codeHighlightingWrapper {
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #fff;
+    opacity: 0;
+  }
+  &:hover::after {
+    opacity: 0.1;
+  }
+
+  .copyIcon {
+    height: auto;
+    width: 5%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: 9999;
+    opacity: 0;
+  }
+
+  &:hover .copyIcon {
+    opacity: 1;
+  }
+
+  .codeBlock {
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    margin: 0 !important;
+    font-size: 0.7rem !important;
+    height: 100%;
+    width: 100%;
+    padding-block: 0.7rem 1rem !important;
+    line-height: 2 !important;
+
+    & > code .linenumber {
+      color: rgb(126, 120, 135) !important;
+    }
+  }
+}
