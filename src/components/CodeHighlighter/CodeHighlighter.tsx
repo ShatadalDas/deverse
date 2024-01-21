@@ -6,7 +6,7 @@ import { AllowArrayElementsOnly } from "@/utils/usefulGenericTypes"
 
 type LanguagesAllowed = AllowArrayElementsOnly<typeof languages>
 
-interface Props {
+type Props = {
     code: string
     lang: LanguagesAllowed
     className?: string
