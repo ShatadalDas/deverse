@@ -1,0 +1,16 @@
+.codeBlock {
+    cursor: text;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    margin: 0 !important;
+    font-size: 0.7rem !important;
+    height: 100%;
+    width: 100%;
+    padding-block: 0.7rem 1rem !important;
+
+    & > code {
+        .linenumber {
+            color: #797979 !important;
+        }
+    }
+}
