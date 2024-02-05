@@ -7,4 +7,4 @@ async function getPost(postID: string) {
   return postRes;
 }
 
-export default getPost
+export default getPost;
