@@ -1,11 +1,10 @@
-import Image from "next/image";
 import RenderPost from "./components/RenderPost/RenderPost";
 import styles from "./page.module.scss";
-import searchIcon from "@/assets/search-icon.png";
 import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
 import Carousel from "./components/Carousel/Carousel";
 import { Suspense } from "react";
 import { PostSkeletonLoader } from "@/components";
+import HashtagAside from "./components/HashtagAside/HashtagAside";
 
 const code = `
 async function Explore() {
@@ -59,9 +58,8 @@ const hashtags = [
 async function Explore() {
   return (
     <section className={styles.explore}>
-
       <Carousel hashtags={hashtags} />
-      
+
       <main className={styles.postsWrapper}>
         <RenderPost {...postDetails} />
         <RenderPost {...postDetails} />
@@ -73,35 +71,7 @@ async function Explore() {
         <RenderPost {...postDetails} />
       </main>
 
-      <aside className={styles.hashtagsWrapper}>
-        <form className={styles.searchWrapper}>
-          <Image
-            src={searchIcon}
-            alt="search icon"
-            className={styles.searchIcon}
-            aria-hidden
-          />
-          <label htmlFor="search" className="sr-only">
-            Search People
-          </label>
-          <input
-            type="search"
-            placeholder="search"
-            className={styles.searchInput}
-            id="search"
-          />
-        </form>
-
-        <h2 className={styles.hashtagTitle}>&#x23;hashtags</h2>
-
-        <ul className={styles.hashtags}>
-          {hashtags.sort().map((hashtag, i) => (
-            <li className={styles.tag} key={i}>
-              &#x23;{hashtag}
-            </li>
-          ))}
-        </ul>
-      </aside>
+      <HashtagAside hashtags={hashtags} />
     </section>
   );
 }

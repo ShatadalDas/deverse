@@ -1,0 +1,81 @@
+
+.hashtagsWrapper {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 9999999;
+
+  height: min-content;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 1rem;
+  background-color: hsl(0, 0%, 10%);
+  margin: 0.5rem;
+  margin-inline-end: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  padding-block-end: 2rem;
+  font-size: clamp(0.5rem, 3vw + 0.1rem, 1.8rem);
+
+  @media (width <= 40em) {
+    display: none;
+  }
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  background-color: hsl(0, 0%, 18%);
+  border-radius: 4000vw;
+  padding-inline: 0.6em;
+}
+
+.searchInput {
+  all: unset;
+  width: 100%;
+  font-size: 0.6em;
+  padding: 0.45em;
+}
+
+.searchIcon {
+  height: 0.6em;
+  width: auto;
+  opacity: 0.4;
+}
+
+.hashtagTitle {
+  width: fit-content;
+  background: linear-gradient(
+    95deg,
+    #20f3e3 20.13%,
+    rgba(49, 97, 235, 0.89) 91.99%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.hashtags {
+  display: flex;
+  flex-wrap: wrap;
+  height: min-content;
+  gap: 0.7rem 0.5rem;
+}
+
+.tag {
+  width: fit-content;
+  font-family: var(--cascadia-code), monospace;
+  background-color: hsl(0, 0%, 22%);
+  font-size: 0.75rem;
+  padding: 0.25em 0.6em;
+  border-radius: 0.35em;
+  cursor: pointer;
+  letter-spacing: 0.015em;
+  font-size: 0.45em;
+  user-select: none;
+  
+  &:is(:hover, :focus) {
+    filter: brightness(150%);
+  }
+}
