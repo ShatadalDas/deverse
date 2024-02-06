@@ -1,14 +1,19 @@
 .codeHighlightingWrapper {
   cursor: text;
-  
+
   .codeBlock {
     scrollbar-width: none;
     scroll-behavior: smooth;
     margin: 0 !important;
-    font-size: 0.7rem !important;
+    font-size: clamp(0.4rem, 2vw + 0.1rem, 0.8rem) !important;
     height: 100%;
     width: 100%;
     padding-block: 0.7rem 1rem !important;
+    line-height: 0.5em !important;
+
+    * {
+      font-size: inherit !important;
+    }
 
     & > code .linenumber {
       color: rgb(126, 120, 135) !important;
