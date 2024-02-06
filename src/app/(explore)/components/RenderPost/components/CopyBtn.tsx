@@ -12,17 +12,21 @@ type CopyBtnProps = {
 
 function CopyBtn({ code }: CopyBtnProps) {
   const [icon, setIcon] = useState(clipboardIcon)
+  const [text, setText] = useState("copy")
 
   function handleClick() {
     navigator.clipboard.writeText(code);
     setIcon(doneIcon)
+    setText("copied")
+    
     setTimeout(() => {
       setIcon(clipboardIcon)
+      setText("copy")
     }, 500);
   }
 
   return (
-    <button className={`${styles.clipboard}`} onClick={handleClick}>
+    <button className={`${styles.clipboard}`} onClick={handleClick} data-text={text}>
       <Image src={icon} alt="clipboard icon" />
     </button>
   );
