@@ -27,7 +27,7 @@ body {
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
-    width: 8px;
+    width: min(8px, 1vw);
   }
 
   &::-webkit-scrollbar-track {
@@ -36,7 +36,10 @@ body {
 
   &::-webkit-scrollbar-thumb {
     border-radius: 1000vw;
-    background: linear-gradient(180deg, #00ffec 0%, #3467ff 100%);
+    background: #888888;
+    
+    //* Too eye catchy
+    // background: linear-gradient(180deg, #00ffec 0%, #3467ff 100%);
   }
 }
 
