@@ -9,9 +9,14 @@
     --logo-size: 1.1rem;
     --link-size: 0.8rem;
   }
-  @media (width <= 30em) {
+  @media (25em < width <= 30em) {
     --logo-size: 0.9rem;
     --link-size: 0.7rem;
+  }
+
+  @media (width <= 25em) {
+    --logo-size: 0.7rem;
+    --link-size: 0.6rem;
   }
 
   position: sticky;
@@ -114,7 +119,7 @@
   background-color: hsl(0, 0%, 18%);
   border-radius: 4000vw;
   padding-inline: 0.5em;
-  font-size: clamp(0.5rem, 3vw + 0.1rem, 1.8rem);
+  font-size: clamp(0.4rem, 2.8vw + 0.1rem, 1.8rem);
   width: 30vw;
 
   @media (width > 40em) {
