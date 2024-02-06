@@ -9,12 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.11",
     "envalid": "^8.0.0",
     "mongoose": "^8.1.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
+    "react-syntax-highlighter": "^15.5.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

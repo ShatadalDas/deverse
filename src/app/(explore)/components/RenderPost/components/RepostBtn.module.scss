@@ -1,0 +1,10 @@
+.repost {
+  img {
+    height: 0.9em;
+    width: auto;
+  }
+
+  &.success {
+    background: hsl(131, 81%, 24%);
+  }
+}
