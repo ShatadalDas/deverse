@@ -73,7 +73,7 @@ function Carousel({ hashtags }: Props) {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
       >
-        {hashtags.sort().map((hashtag, i) => (
+        {hashtags.sort().filter((item, pos, ary) => (!pos || item != ary[pos - 1])).map((hashtag, i) => (
           <li className={styles.tag} key={i}>
             &#x23;{hashtag}
           </li>

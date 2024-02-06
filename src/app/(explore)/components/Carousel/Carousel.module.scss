@@ -24,6 +24,7 @@
   align-items: center;
   justify-content: center;
   width: 3em;
+  z-index: 999;
 
   img {
     height: 0.9rem;
@@ -76,7 +77,7 @@
   cursor: pointer;
   user-select: none;
 
-  & > *:is(:hover, :focus) {
+  li:is(:hover, :focus-within) {
     filter: brightness(150%);
   }
 
