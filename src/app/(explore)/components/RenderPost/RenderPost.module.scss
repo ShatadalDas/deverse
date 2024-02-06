@@ -1,0 +1,117 @@
+.renderPost {
+  display: grid;
+  gap: 0.5em;
+  padding-inline: 0.6em;
+  font-size: clamp(0.3rem, 2vw + 0.1rem, 0.9rem);
+  @media (width <= 40em) {
+    font-size: clamp(0.4rem, 2.2vw + 0.1rem, 1rem);
+  }
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.userPic {
+  height: 1.8em;
+  width: auto;
+  border-radius: 50%;
+}
+
+.info {
+  display: grid;
+  gap: 0.02em;
+
+  p:last-child {
+    font-size: 0.5em;
+    font-family: var(--libre-franklin);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    word-spacing: 0.02em;
+    opacity: 0.9;
+  }
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 1em;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2em;
+    border-radius: 50%;
+  }
+}
+
+.name {
+  font-family: var(--libre-franklin), sans-serif;
+  font-weight: 700;
+}
+
+.inspectIcon {
+  height: 0.85em;
+  width: auto;
+}
+
+.description {
+  font-size: 0.9em;
+}
+
+.codeBlock {
+  border-radius: 0.5rem;
+
+  * {
+    font-size: 0.92em;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5em;
+  padding-inline: 0.5rem;
+
+  :where(button) {
+    display: grid;
+    place-items: center;
+    color: #fff;
+    height: 1.7em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: hsl(0, 0%, 20%);
+    box-shadow: 0 0 0.05em hsl(0, 0%, 50%);
+    position: relative;
+
+    &::after {
+      content: attr(data-count);
+      position: absolute;
+      top: 105%;
+      font-size: 0.42em;
+      font-weight: 300;
+      font-family: var(--inria-sans);
+      opacity: 0.7;
+    }
+    
+    &:hover {
+      filter: brightness(130%);
+      
+      &::after {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  :where(img) {
+    height: 0.6em;
+    width: auto;
+  }
+  :where(p) {
+    font-size: 0.4em;
+    font-weight: 700;
+  }
+}
