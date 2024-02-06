@@ -24,6 +24,7 @@ body {
   flex-direction: column;
   position: relative;
   isolation: isolate;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     width: 8px;
