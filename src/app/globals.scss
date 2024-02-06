@@ -24,6 +24,19 @@ body {
   flex-direction: column;
   position: relative;
   isolation: isolate;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1000vw;
+    background: linear-gradient(180deg, #00ffec 0%, #3467ff 100%);
+  }
 }
 
 input,

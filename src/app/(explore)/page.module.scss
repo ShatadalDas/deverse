@@ -3,6 +3,12 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   content: normal;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  
 
   @media (width <= 40em) {
     grid-template-columns: 1fr;
@@ -96,7 +102,4 @@
   row-gap: 1.4em;
   padding: 1em 0.5em;
   height: 100%;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-  scrollbar-color: #14ffed;
 }
