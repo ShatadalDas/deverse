@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "@types/react-syntax-highlighter": "^15.5.11",
     "envalid": "^8.0.0",
     "mongoose": "^8.1.0",

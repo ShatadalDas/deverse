@@ -1,0 +1,116 @@
+.postForm {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  padding-block-start: 0;
+  font-size: clamp(0.4rem, 2vw + 0.1rem, 1.1rem);
+  @media (width <= 40em) {
+    flex-direction: column;
+  }
+
+  :where(section) {
+    flex: 1;
+  }
+
+  :where(textarea) {
+    resize: none;
+    background-color: #191919;
+    border: none;
+    outline: none;
+    padding: 1.5vw;
+    border-radius: 0.5rem;
+    line-height: 1.5;
+    font-weight: 300;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      width: min(5px, 0.5vw);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 1000vw;
+      background: #888888;
+    }
+
+    &:focus {
+      outline: 1px dotted #fff;
+    }
+  }
+}
+
+.leftSection {
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  row-gap: 1rem;
+
+  @media (width <= 40em) {
+    grid-template-rows: 2fr 1fr;
+  }
+}
+
+.rightSection {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.descriptionWrapper,
+.hashtagsWrapper,
+.codeWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.3rem;
+
+  p {
+    font-size: 1.2em;
+  }
+}
+
+.buttonWrapper {
+  justify-self: end;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dropDownMenu {
+  background-color: transparent;
+  border: 1px solid #fff;
+  padding: 0.4rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  font-size: 0.9em;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: min(10px, 2vw);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1000vw;
+    background: #888888;
+  }
+
+
+  option {
+    background-color: #000;
+    border: none;
+    outline: 0;
+  }
+}
+
+.codeTextArea {
+  font-family: var(--cascadia-code);
+}
+
+.codeWrapper p {
+  position: relative;
+  width: fit-content;
+}

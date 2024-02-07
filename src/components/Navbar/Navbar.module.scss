@@ -28,9 +28,10 @@
   background-color: var(--_bg-clr);
   padding-inline: min(2vw, 1rem);
   min-height: min(2.5rem, 7.5vw);
-
+  
   @media (width > 40em) {
     box-shadow: 0 0.5rem 1rem #0f0f0f;
+    margin-block-end: 1rem;
   }
 }
 

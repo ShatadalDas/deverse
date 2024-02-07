@@ -72,9 +72,6 @@ async function RenderPost(props: Props) {
       />
 
       <div className={styles.actions}>
-        {/* <UpvoteBtn totalUpvotes={props.totalUpvotes} />
-
-        <DownvoteBtn totalDownvotes={props.totalDownvotes} /> */}
 
         <UpvoteDownVoteWrapper totalUpvotes={props.totalUpvotes} totalDownvotes={props.totalDownvotes}/>
 
