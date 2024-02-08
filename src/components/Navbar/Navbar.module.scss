@@ -117,15 +117,17 @@
 .searchWrapper {
   display: flex;
   align-items: center;
+  gap: 0.2em;
   background-color: hsl(0, 0%, 18%);
   border-radius: 4000vw;
   padding-inline: 0.5em;
-  font-size: clamp(0.4rem, 2.8vw + 0.1rem, 1.8rem);
+  font-size: clamp(0.4rem, 2.8vw + 0.1rem, 1.2rem);
   width: 30vw;
+  max-width: 10rem;
 
-  @media (width > 40em) {
-    display: none;
-  }
+  // @media (width > 40em) {
+  //   display: none;
+  // }
 }
 
 .searchInput {

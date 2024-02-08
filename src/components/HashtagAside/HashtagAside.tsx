@@ -9,7 +9,7 @@ type Props = {
 function HashtagAside({hashtags}: Props) {
   return (
     <aside className={styles.hashtagsWrapper}>
-    <form className={styles.searchWrapper}>
+    {/* <form className={styles.searchWrapper}>
       <Image
         src={searchIcon}
         alt="search icon"
@@ -25,12 +25,12 @@ function HashtagAside({hashtags}: Props) {
         className={styles.searchInput}
         id="search"
       />
-    </form>
+    </form> */}
 
     <h2 className={styles.hashtagTitle}>&#x23;hashtags</h2>
 
     <ul className={styles.hashtags}>
-      {hashtags.sort().map((hashtag, i) => (
+      {hashtags.sort().filter((item, pos, ary) => (!pos || item != ary[pos - 1])).map((hashtag, i) => (
         <li className={styles.tag} key={i}>
           &#x23;{hashtag}
         </li>

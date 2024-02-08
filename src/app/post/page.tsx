@@ -31,15 +31,18 @@ function Post() {
       <section className={styles.rightSection}>
         <div className={styles.buttonWrapper}>
           <select defaultValue={"python"} className={styles.dropDownMenu}>
-            {
-              langArr.map((lang) => (<option value={lang}>{lang}</option>))
-            }
+            {langArr.map((lang) => (
+              <option value={lang}>{lang}</option>
+            ))}
           </select>
           <GradientBtn text="Done" className={styles.gradientBtn} />
         </div>
         <div className={styles.codeWrapper}>
           <p>Code</p>
-          <textarea  className={styles.codeTextArea} placeholder="eg: print('Hello World')" />
+          <textarea
+            className={styles.codeTextArea}
+            placeholder="eg: print('Hello World')"
+          />
         </div>
       </section>
     </form>

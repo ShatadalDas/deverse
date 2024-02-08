@@ -1,0 +1,73 @@
+.renderForum {
+  display: grid;
+  gap: 0.5em;
+  font-size: clamp(0.4rem, 3vw + 0.1rem, 1.2rem);
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    width: 100%;
+    height: 1px;
+    background-color: hsl(0, 0%, 25%);
+  }
+}
+
+.linkWrapper {
+  display: grid;
+  gap: 0.4em;
+  
+  &:where(:hover) {
+    filter: brightness(90%);
+  }
+
+  &:where(:focus-visible) {
+    outline: 1px solid yellow;
+    padding: 0.2rem;
+  }
+
+  h2 {
+    line-height: 1;
+    font-size: 1.1em;
+  }
+  
+  p {
+    font-size: 0.8em;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    font-weight: 200;
+  }
+}
+
+.timeAndUserWrapper {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  font-family: var(--libre-franklin);
+}
+
+.timeAndDate {
+  color: #14FFED;
+  font-size: 0.4em;
+  font-weight: 700;
+}
+
+.userInfoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+
+  p {
+    font-size: 0.55em;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+}
+
+.userPic {
+  height: 0.7em;
+  width: auto;
+  border-radius: 50%;
+}
+

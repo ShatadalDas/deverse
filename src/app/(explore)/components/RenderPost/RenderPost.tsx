@@ -2,14 +2,11 @@ import styles from "./RenderPost.module.scss";
 import Image from "next/image";
 import { CodeHighlighter } from "@/components";
 import inspectIcon from "@/assets/inspect-icon.png";
-import UpvoteBtn from "./components/UpvoteBtn";
-import DownvoteBtn from "./components/DownvoteBtn";
 import CommentBtn from "./components/CommentBtn";
 import ShareBtn from "./components/ShareBtn";
 import RepostBtn from "./components/RepostBtn";
 import CopyBtn from "./components/CopyBtn";
 import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
-import { createPost, getPost } from "@/backend";
 import UpvoteDownVoteWrapper from "./components/UpvoteDownVoteWrapper";
 
 type Props = {
@@ -35,7 +32,7 @@ type PropsT = {
 async function RenderPost(props: Props) {
 
   return (
-    <section className={styles.renderPost}>
+    <li className={styles.renderPost}>
       <div className={styles.infoWrapper}>
         <Image
           src={props.profilePic || "/user.png"}
@@ -83,7 +80,7 @@ async function RenderPost(props: Props) {
 
         <CopyBtn code={props.code} />
       </div>
-    </section>
+    </li>
   );
 }
 
