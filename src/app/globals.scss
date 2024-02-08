@@ -37,7 +37,7 @@ body {
   &::-webkit-scrollbar-thumb {
     border-radius: 1000vw;
     background: #888888;
-    
+
     //* Too eye catchy
     // background: linear-gradient(180deg, #00ffec 0%, #3467ff 100%);
   }
@@ -75,4 +75,22 @@ button {
   height: 0;
   width: 0;
   font-size: 0;
+}
+
+.loading {
+  width: 100vw;
+  height: 2px;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  background-image: linear-gradient(to right, #3161eb, #14ffed, #3161eb);
+  background-size: 600%;
+  background-position: right;
+  animation: loading 700ms infinite ease-in-out;
+}
+
+@keyframes loading {
+  100% {
+    background-position: left;
+  }
 }
