@@ -65,7 +65,7 @@
   grid-template-rows: auto 1fr;
   gap: 0.3rem;
 
-  p {
+  label{
     font-size: 1.2em;
   }
 }
@@ -109,7 +109,7 @@
   font-family: var(--cascadia-code);
 }
 
-.codeWrapper p {
+.codeWrapper label {
   position: relative;
   width: fit-content;
 }
