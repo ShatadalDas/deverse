@@ -11,7 +11,7 @@ export type LanguagesAllowed = AllowArrayElementsOnly<typeof languages>;
 
 type Props = {
   code: string;
-  lang: LanguagesAllowed;
+  lang: string;
   className?: string;
 };
 

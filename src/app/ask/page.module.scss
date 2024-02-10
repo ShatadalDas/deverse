@@ -1,0 +1,76 @@
+@use "@/scss/_mixin.scss" as *;
+
+.askForm {
+  flex: 1;
+  height: calc(100vh - var(--navbar-min-height) - 1rem);
+  padding: 1rem;
+  padding-block-start: 0;
+  display: flex;
+  gap: 1rem;
+  font-size: clamp(0.4rem, 2vw + 0.1rem, 1.1rem);
+
+  @media (width <= 40em) {
+    padding-block-start: 1rem;
+  }
+}
+
+
+
+.left {
+  flex: 1;
+  display: grid;
+  grid-template-rows: 3fr 1.5fr 1fr;
+  gap: 0.5rem;
+
+  @include styled-textarea(0.8em);
+  
+  @media (width <= 40em) {
+    :where(textarea) {
+      font-size: 1em;
+    }
+  }
+}
+
+.descriptionWrapper,
+.metaDescriptionWrapper,
+.hashtagsWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.2rem;
+}
+
+.descriptionWrapper {
+  flex-grow: 3;
+}
+.metaDescriptionWrapper {
+  flex-grow: 1.5;
+}
+
+.hashtagsWrapper {
+  flex-grow: 0.5;
+}
+
+.hashtagAndButtonWrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+}
+
+.gradientBtn {
+  height: fit-content;
+  align-self: flex-end;
+}
+
+.right {
+  flex: 1;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.5rem;
+
+  & > div {
+    overflow-y: auto;
+    
+    @include custom-scroll-bar();
+  }
+
+}

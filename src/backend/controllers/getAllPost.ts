@@ -6,7 +6,7 @@ async function getAllPost(userID: string, quantity: number) {
     return posts;
   } catch (err: any) {
     console.log(err.message);
-    throw new Error("Error fetching ");
+    throw new Error("Error fetching data");
   }
 }
 

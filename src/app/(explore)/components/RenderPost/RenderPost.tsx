@@ -17,17 +17,13 @@ type Props = {
   profilePic: string;
   description: string;
   code: string;
-  lang: LanguagesAllowed;
+  lang: string;
   totalUpvotes: number;
   totalDownvotes: number;
   totalComments: number;
   totalShares: number;
   totalReposts: number;
 };
-
-type PropsT = {
-  postID: string;
-}
 
 async function RenderPost(props: Props) {
 

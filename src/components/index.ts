@@ -4,3 +4,4 @@ export { default as PostSkeletonLoader } from "./PostSkeletonLoader/PostSkeleton
 export { default as GradientBtn } from "./GradientBtn/GradientBtn"
 export { default as HashtagAside } from "./HashtagAside/HashtagAside"
 export { default as Carousel } from "./Carousel/Carousel"
+export { default as MarkdownRenderer } from "./MarkdownRenderer/MarkdownRenderer"

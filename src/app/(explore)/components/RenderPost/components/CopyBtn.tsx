@@ -5,6 +5,7 @@ import styles from "./CopyBtn.module.scss"
 import clipboardIcon from "@/assets/clipboard.png";
 import doneIcon from "@/assets/done.png";
 import { useState } from "react";
+import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 type CopyBtnProps = {
   code: string;

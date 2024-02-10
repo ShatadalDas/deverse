@@ -1,0 +1,39 @@
+@mixin custom-scroll-bar {
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: min(8px, 1vw);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1000vw;
+    background: #888888;
+
+    //* Too eye catchy
+    // background: linear-gradient(180deg, #00ffec 0%, #3467ff 100%);
+  }
+}
+
+
+@mixin styled-textarea($fontSize: 1em) {
+  :where(textarea) {
+    resize: none;
+    background-color: #191919;
+    border: none;
+    outline: none;
+    padding: 1vw;
+    border-radius: 0.5rem;
+    line-height: 1.5;
+    font-weight: 300;
+    font-size: $fontSize;
+    @include custom-scroll-bar();
+
+    &:focus {
+      outline: 1px dotted #fff;
+    }
+  }
+}

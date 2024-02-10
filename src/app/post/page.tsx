@@ -1,6 +1,7 @@
 import { GradientBtn } from "@/components";
 import styles from "./page.module.scss";
 import langArr from "@/utils/langArr";
+import CodeTextArea from "./components/CodeTextArea";
 
 function Post() {
   async function onSubmit() {
@@ -32,8 +33,14 @@ function Post() {
 
       <section className={styles.rightSection}>
         <div className={styles.buttonWrapper}>
-          <label htmlFor="select-language" className="sr-only">Select Language for the code</label>
-          <select id="select-language" defaultValue={"python"} className={styles.dropDownMenu}>
+          <label htmlFor="select-language" className="sr-only">
+            Select Language for the code
+          </label>
+          <select
+            id="select-language"
+            defaultValue={"python"}
+            className={styles.dropDownMenu}
+          >
             {langArr.map((lang) => (
               <option value={lang}>{lang}</option>
             ))}
@@ -42,11 +49,7 @@ function Post() {
         </div>
         <div className={styles.codeWrapper}>
           <label htmlFor="code-input">Code</label>
-          <textarea
-            id="code-input"
-            className={styles.codeTextArea}
-            placeholder="eg: print('Hello World')"
-          />
+          <CodeTextArea styles={styles} />
         </div>
       </section>
     </form>

@@ -1,10 +1,13 @@
 import styles from "./page.module.scss";
+import FormWrapper from "./components/FormWrapper";
 
-function Ask() {
+
+async function Ask() {
   return (
-    <div>
-      <h1>Ask</h1>
-    </div>
+    <form className={styles.askForm}>
+      <FormWrapper styles={styles} />
+    </form>
   );
 }
+
 export default Ask;
