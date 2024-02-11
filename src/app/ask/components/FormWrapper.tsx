@@ -25,7 +25,7 @@ function FormWrapper({ styles }: Props) {
 
   return (
     <>
-      <section className={styles.left}>
+      <main className={styles.left}>
         <div className={styles.descriptionWrapper}>
           <label htmlFor="doubt-description">Description</label>
           <textarea
@@ -52,13 +52,13 @@ function FormWrapper({ styles }: Props) {
             <GradientBtn className={styles.gradientBtn} text="Done" />
           </div>
         </div>
-      </section>
+      </main>
 
       {windowWidth && windowWidth > 640 && (
-        <section className={styles.right}>
+        <aside className={styles.right}>
           <p>Preview</p>
           <MarkdownRenderer text={des} />
-        </section>
+        </aside>
       )}
     </>
   );
