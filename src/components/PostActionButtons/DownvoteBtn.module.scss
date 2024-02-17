@@ -1,0 +1,42 @@
+.downvote {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  height: 1.8em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: hsl(0, 0%, 20%);
+  box-shadow: 0 0 0.05em hsl(0, 0%, 50%);
+  position: relative;
+
+  &::after {
+    content: attr(data-count);
+    position: absolute;
+    top: 108%;
+    font-size: 0.54em;
+    font-weight: 300;
+    font-family: var(--inria-sans);
+    opacity: 0.7;
+  }
+
+  &:hover {
+    filter: brightness(130%);
+
+    &::after {
+      opacity: 0.9;
+    }
+  }
+
+  &.success {
+    background: linear-gradient(
+      180deg,
+      hsl(175, 100%, 45%) 0%,
+      hsla(225, 82%, 45%, 0.89) 100%
+    );
+  }
+
+  img {
+    height: 0.6em;
+    width: auto;
+  }
+}

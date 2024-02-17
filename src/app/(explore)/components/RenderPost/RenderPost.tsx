@@ -2,12 +2,15 @@ import styles from "./RenderPost.module.scss";
 import Image from "next/image";
 import { CodeHighlighter } from "@/components";
 import inspectIcon from "@/assets/inspect-icon.png";
-import CommentBtn from "./components/CommentBtn";
-import ShareBtn from "./components/ShareBtn";
-import RepostBtn from "./components/RepostBtn";
-import CopyBtn from "./components/CopyBtn";
-import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
-import UpvoteDownVoteWrapper from "./components/UpvoteDownVoteWrapper";
+import {
+  UpvoteDownVoteWrapper,
+  CommentBtn,
+  ShareBtn,
+  RepostBtn,
+  CopyBtn,
+} from "@/components/PostActionButtons";
+
+
 
 type Props = {
   username: string;
@@ -26,7 +29,6 @@ type Props = {
 };
 
 async function RenderPost(props: Props) {
-
   return (
     <li className={styles.renderPost}>
       <div className={styles.infoWrapper}>
@@ -57,7 +59,7 @@ async function RenderPost(props: Props) {
       </div>
 
       <div className={styles.description}>{props.description.trim()}</div>
-      
+
       <CodeHighlighter
         code={props.code}
         lang={props.lang}
@@ -65,8 +67,10 @@ async function RenderPost(props: Props) {
       />
 
       <div className={styles.actions}>
-
-        <UpvoteDownVoteWrapper totalUpvotes={props.totalUpvotes} totalDownvotes={props.totalDownvotes}/>
+        <UpvoteDownVoteWrapper
+          totalUpvotes={props.totalUpvotes}
+          totalDownvotes={props.totalDownvotes}
+        />
 
         <CommentBtn totalComments={props.totalComments} />
 
