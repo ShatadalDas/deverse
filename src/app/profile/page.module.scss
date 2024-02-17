@@ -1,0 +1,27 @@
+.profile {
+  padding-block-start: var(--navbar-min-height);
+  min-height: 500vh;
+
+  table {
+    position: absolute;
+    top: 0;
+    height: 80vh;
+    width: 100%;
+    // background-image: url("/demo-banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+
+    &::after {
+      --_height: 30%;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% - (var(--_height)/1.2));
+      height: var(--_height);
+      background-image: linear-gradient(to bottom, transparent, #0f0f0f 81%);
+    }
+  }
+}

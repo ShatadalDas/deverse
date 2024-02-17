@@ -25,14 +25,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--_bg-clr);
+  background: var(--_bg-clr);
   padding-inline: min(2vw, 1rem);
   min-height: var(--navbar-min-height);
-  
+
   @media (width > 40em) {
     box-shadow: 0 0.5rem 1rem #0f0f0f;
     margin-block-end: 1rem;
   }
+}
+
+.profileNav {
+  position: fixed;
+  inset: auto 0;
+  background: linear-gradient(180deg, #1e1e1e 0%, rgba(30, 30, 30, 0.47) 100%);
+  backdrop-filter: blur(23px);
+  box-shadow: none;
 }
 
 .logoWrapper {
@@ -125,6 +133,10 @@
   width: 30vw;
   max-width: 10rem;
 
+  &:focus-within {
+    outline: 1px solid #50d4d0;
+  }
+
   // @media (width > 40em) {
   //   display: none;
   // }
@@ -143,4 +155,9 @@
   height: 0.6em;
   width: auto;
   opacity: 0.4;
+}
+
+.profileNav .searchWrapper {
+  background-color: hsl(0, 0%, 20%);
+  box-shadow: 0 0 0.5rem #222;
 }
