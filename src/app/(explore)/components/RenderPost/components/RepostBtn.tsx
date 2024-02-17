@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./RepostBtn.module.scss";
 import repostIcon from "@/assets/repost-icon.png";
-import formatNumberWithAbbreviation from "@/utils/formatNumberWithAbbreviation";
+import formatNumberAbbreviated from "@/utils/formatNumberAbbreviated";
 import { useState } from "react";
 
 type Props = {
@@ -17,7 +17,7 @@ function RepostBtn({ totalReposts }: Props) {
     <button
       onClick={() => setReposted(true)}
       className={`${styles.repost} ${reposted ? styles.success : ""}`}
-      data-count={formatNumberWithAbbreviation(totalReposts)}
+      data-count={formatNumberAbbreviated(totalReposts)}
     >
       <Image src={repostIcon} alt="repost icon" />
     </button>
