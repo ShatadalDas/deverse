@@ -10,13 +10,9 @@ const links = ["explore", "post", "forum", "ask", "profile"];
 
 function Navbar() {
   const pathname = usePathname();
-  console.log(pathname);
+
   return (
-    <nav
-      className={
-        `${styles.navbar} ${(pathname === "/profile") ? styles.profileNav : ""}`
-      }
-    >
+    <nav className={styles.navbar}>
       <h1 className={styles.logoWrapper}>
         <Image
           className={styles.logoImage}
@@ -30,12 +26,8 @@ function Navbar() {
       </h1>
       <ul className={styles.linkWrapper}>
         <li className={styles.searchWrapper}>
-          <Image src={searchIcon} alt="" className={styles.searchIcon} />
-          <input
-            type="search"
-            className={styles.searchInput}
-            placeholder="search"
-          />
+          <Image src={searchIcon} alt="" className={styles.searchIcon}/>
+          <input type="search" className={styles.searchInput} placeholder="search" />
         </li>
 
         {links.map((link, i) => {

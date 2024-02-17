@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./UpvoteBtn.module.scss";
 import upArrow from "@/assets/up-arrow.png";
-import formatNumberWithAbbreviation from "@/utils/formatNumberWithAbbreviation";
+import formatNumberAbbreviated from "@/utils/formatNumberAbbreviated";
 import { Dispatch, SetStateAction } from "react";
 
 type UpvoteBtnProps = {
@@ -12,18 +12,12 @@ type UpvoteBtnProps = {
   setBtnClicked: Dispatch<SetStateAction<"" | "up" | "down">>;
 };
 
-function UpvoteBtn({
-  totalUpvotes,
-  btnClicked,
-  setBtnClicked,
-}: UpvoteBtnProps) {
+function UpvoteBtn({ totalUpvotes, btnClicked, setBtnClicked }: UpvoteBtnProps) {
   return (
     <button
-      onClick={() => setBtnClicked((state) => (state === "up" ? "" : "up"))}
-      className={`${styles.upvote} ${
-        btnClicked === "up" ? styles.success : ""
-      }`}
-      data-count={formatNumberWithAbbreviation(totalUpvotes)}
+      onClick={() => setBtnClicked((state) => state === "up" ? "" : "up")}
+      className={`${styles.upvote} ${btnClicked === "up" ? styles.success : ""}`}
+      data-count={formatNumberAbbreviated(totalUpvotes)}
     >
       <Image src={upArrow} alt="up vote icon" />
     </button>
