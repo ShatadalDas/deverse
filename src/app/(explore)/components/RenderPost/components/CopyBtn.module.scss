@@ -1,0 +1,11 @@
+button.clipboard {
+
+  img {
+    height: 0.8em;
+    width: auto;
+  }
+
+  &::after {
+    content: attr(data-text);
+  }
+}

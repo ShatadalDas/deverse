@@ -1,0 +1,11 @@
+.comment {
+  img {
+    height: 0.7em;
+    width: auto;
+  }
+
+  &.success {
+    background: hsl(345, 57%, 33%);
+  }
+
+}
