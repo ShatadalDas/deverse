@@ -1,7 +1,6 @@
-import RenderPost from "./components/RenderPost/RenderPost";
 import styles from "./page.module.scss";
 import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
-import { HashtagAside, Carousel } from "@/components";
+import { HashtagAside, Carousel, RenderPost } from "@/components";
 
 const code = `
 async function Explore() {
@@ -58,13 +57,13 @@ async function Explore() {
       <Carousel hashtags={hashtags} />
 
       <ul className={styles.postsWrapper}>
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
-        <RenderPost {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
+        <RenderPost postType="normal" {...postDetails} />
       </ul>
 
       <HashtagAside hashtags={hashtags} />

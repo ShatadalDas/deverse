@@ -4,14 +4,16 @@
   grid-template-columns: 2fr 1fr;
   content: normal;
   scrollbar-width: none;
-
+  padding-block-start: 1rem;
+  
   &::-webkit-scrollbar {
     width: 0;
   }
-
+  
   @media (width <= 40em) {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
+    padding-block-start: 0;
   }
 }
 
