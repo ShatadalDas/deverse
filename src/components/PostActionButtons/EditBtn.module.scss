@@ -1,10 +1,10 @@
-.clipboard {
+.editBtn {
   &::after {
     content: attr(data-text);
   }
 
   img {
-    height: 0.8em;
+    height: 0.7em;
     width: auto;
   }
 }

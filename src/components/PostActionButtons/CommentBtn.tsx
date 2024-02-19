@@ -15,7 +15,7 @@ function CommentBtn({ totalComments }: CommentBtnProps) {
   return (
     <button
       onClick={() => setCommented((state) => !state)}
-      className={`${styles.comment} ${commented ? styles.success : ""}`}
+      className={`${styles.commentBtn} ${commented ? styles.success : ""}`}
       data-count={formatNumberWithAbbreviation(totalComments)}
     >
       <Image src={commentIcon} alt="comment icon" />

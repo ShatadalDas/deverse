@@ -10,6 +10,8 @@ import {
   CopyBtn,
 } from "@/components/PostActionButtons";
 import Link from "next/link";
+import EditBtn from "../PostActionButtons/EditBtn";
+import DeleteBtn from "../PostActionButtons/DeleteBtn";
 
 type NormalPost = {
   postType: "normal";
@@ -48,22 +50,15 @@ type Props = (NormalPost | ProfileSectionPost) & {
 
 async function RenderPost(props: Props) {
   return (
-    <li className={`${styles.renderPost} ${props.postType === "normal" ? styles.normalPost : ""}`}>
+    <li
+      className={`${styles.renderPost} ${
+        props.postType === "normal" ? styles.normalPost : ""
+      }`}
+    >
       {props.postType === "normal" ? (
-        <NormalPostInfoUI
-          profilePic={props.profilePic}
-          name={props.name}
-          time={props.time}
-          date={props.date}
-          username={props.username}
-        />
+        <NormalPostInfoUI {...props} />
       ) : (
-        <AlternateInfoUI
-          date={props.date}
-          time={props.time}
-          isEdited={props.edited}
-          reposted={props.reposted}
-        />
+        <AlternateInfoUI {...props} />
       )}
 
       <div className={styles.description}>{props.description.trim()}</div>
@@ -75,18 +70,11 @@ async function RenderPost(props: Props) {
       />
 
       <div className={styles.actions}>
-        <UpvoteDownVoteWrapper
-          totalUpvotes={props.totalUpvotes}
-          totalDownvotes={props.totalDownvotes}
-        />
-
-        <CommentBtn totalComments={props.totalComments} />
-
-        <ShareBtn totalShares={props.totalShares} />
-
-        <RepostBtn totalReposts={props.totalReposts} />
-
-        <CopyBtn code={props.code} />
+        {props.postType === "author" ? (
+          <AuthorsPostActionButtons {...props} />
+        ) : (
+          <PostActionButtons {...props} />
+        )}
       </div>
     </li>
   );
@@ -104,7 +92,8 @@ function NormalPostInfoUI({
   name,
   time,
   date,
-}: Pick<NormalPost, "username" | "profilePic" | "name"> & Pick<Props, "time" | "date">) {
+}: Pick<NormalPost, "username" | "profilePic" | "name"> &
+  Pick<Props, "time" | "date">) {
   return (
     <div className={styles.normalPostInfoUIWrapper}>
       <Image
@@ -151,10 +140,10 @@ function AlternateInfoUI(
       </p>
 
       {props.reposted && (
-          <Link href={"/" + props.reposted.from} className={styles.extraInfo}>
-            <span>Author:</span>
-            <span>{props.reposted.from}</span>
-          </Link>
+        <Link href={"/" + props.reposted.from} className={styles.extraInfo}>
+          <span>Author:</span>
+          <span>{props.reposted.from}</span>
+        </Link>
       )}
 
       {props.isEdited && (
@@ -163,5 +152,67 @@ function AlternateInfoUI(
         </p>
       )}
     </div>
+  );
+}
+
+function PostActionButtons(
+  props: Pick<
+    Props,
+    | "totalUpvotes"
+    | "totalDownvotes"
+    | "totalShares"
+    | "totalComments"
+    | "totalReposts"
+    | "code"
+  >
+) {
+  return (
+    <>
+      <UpvoteDownVoteWrapper
+        totalUpvotes={props.totalUpvotes}
+        totalDownvotes={props.totalDownvotes}
+      />
+
+      <CommentBtn totalComments={props.totalComments} />
+
+      <ShareBtn totalShares={props.totalShares} />
+
+      <RepostBtn totalReposts={props.totalReposts} />
+
+      <CopyBtn code={props.code} />
+    </>
+  );
+}
+
+function AuthorsPostActionButtons(
+  props: Pick<
+    Props,
+    | "totalUpvotes"
+    | "totalDownvotes"
+    | "totalShares"
+    | "totalComments"
+    | "totalReposts"
+    | "code"
+  >
+) {
+  return (
+    <>
+      <UpvoteDownVoteWrapper
+        totalUpvotes={props.totalUpvotes}
+        totalDownvotes={props.totalDownvotes}
+      />
+
+      <CommentBtn totalComments={props.totalComments} />
+
+      <ShareBtn totalShares={props.totalShares} />
+
+      <RepostBtn totalReposts={props.totalReposts} disabled />
+
+      <CopyBtn code={props.code} />
+
+      <EditBtn />
+
+      <DeleteBtn />
+    </>
   );
 }

@@ -8,9 +8,10 @@ import { useState } from "react";
 
 type Props = {
   totalReposts: number;
+  disabled?: boolean;
 };
 
-function RepostBtn({ totalReposts }: Props) {
+function RepostBtn({ totalReposts, disabled = false }: Props) {
   const [reposted, setReposted] = useState(false);
 
   return (
@@ -18,6 +19,8 @@ function RepostBtn({ totalReposts }: Props) {
       onClick={() => setReposted(true)}
       className={`${styles.repost} ${reposted ? styles.success : ""}`}
       data-count={formatNumberWithAbbreviation(totalReposts)}
+      aria-disabled={disabled}
+      disabled={disabled}
     >
       <Image src={repostIcon} alt="repost icon" />
     </button>

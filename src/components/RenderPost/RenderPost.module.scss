@@ -7,6 +7,7 @@
 
 .normalPost {
   gap: 0.5em;
+  
   @media (width <= 40em) {
     font-size: clamp(0.4rem, 2.2vw + 0.1rem, 1rem);
   }
@@ -119,6 +120,9 @@
 }
 
 .actions {
+  --bg: hsl(0, 0%, 20%);
+  --shadow-clr: hsl(0, 0%, 50%);
+
   display: flex;
   gap: 0.5em;
   padding-inline: 0.5rem;
@@ -130,8 +134,8 @@
     height: 1.8em;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: hsl(0, 0%, 20%);
-    box-shadow: 0 0 0.05em hsl(0, 0%, 50%);
+    background: var(--bg);
+    box-shadow: 0 0 0.05em var(--shadow-clr);
     position: relative;
 
     &::after {
@@ -141,14 +145,15 @@
       font-size: 0.54em;
       font-weight: 300;
       font-family: var(--inria-sans);
-      opacity: 0.7;
+      opacity: 0.75;
+      letter-spacing: 0.03em;
     }
 
     &:hover {
       filter: brightness(130%);
 
       &::after {
-        opacity: 0.9;
+        opacity: 1;
       }
     }
   }
