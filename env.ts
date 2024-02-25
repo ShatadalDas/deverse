@@ -1,5 +1,13 @@
-import { cleanEnv, str } from "envalid";
+import { z } from "zod";
 
-export default cleanEnv(process.env, {
-  MONGO_URI: str(),
-});
+const envVariables = z.object({
+  MONGO_URI: z.string()
+})
+
+envVariables.parse(process.env)
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv extends z.infer<typeof envVariables> {}
+  }
+}
