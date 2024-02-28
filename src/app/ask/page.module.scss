@@ -1,19 +1,6 @@
 @use "@/scss/_mixin.scss" as *;
 
-.askForm {
-  flex: 1;
-  height: calc(100vh - var(--navbar-min-height) - 1rem);
-  padding: 1.5vw 1rem;
-  display: flex;
-  gap: 1rem;
-  font-size: clamp(0.4rem, 2vw + 0.1rem, 1.1rem);
-
-  @media (width <= 40em) {
-    padding-block-start: 1rem;
-  }
-}
-
-.left {
+.textareaSection {
   flex: 1;
   display: grid;
   grid-template-rows: 3fr 1.5fr 1fr;
@@ -58,7 +45,7 @@
   align-self: flex-end;
 }
 
-.right {
+.markdownSection {
   flex: 1;
   display: grid;
   grid-template-rows: auto 1fr;

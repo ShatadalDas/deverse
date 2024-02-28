@@ -1,0 +1,12 @@
+.askFormLayout {
+  flex: 1;
+  height: calc(100vh - var(--navbar-min-height) - 1rem);
+  padding: 1.5vw 1rem;
+  display: flex;
+  gap: 1rem;
+  font-size: clamp(0.4rem, 2vw + 0.1rem, 1.1rem);
+
+  @media (width <= 40em) {
+    padding-block-start: 1rem;
+  }
+}
