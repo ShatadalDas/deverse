@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export default function RootLayout({ children }: Props) {
   return (

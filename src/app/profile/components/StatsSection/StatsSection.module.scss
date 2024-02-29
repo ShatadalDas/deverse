@@ -1,0 +1,56 @@
+.statsSection {
+  font-size: clamp(0.5em, 1.5vw + 0.1rem, 0.9rem);
+
+  display: grid;
+  gap: 1em;
+}
+
+.bigStats,
+.smallStats {
+  // display: flex;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5em;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+
+      span {
+        font-size: 1em;
+        opacity: 0.9;
+        letter-spacing: 0.05em;
+      }
+
+      img {
+        width: 0.7em;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+    }
+
+    & > p {
+      font-weight: 700;
+      font-size: 7em;
+      transform: translateY(-25%);
+      position: relative;
+      z-index: -1;
+      letter-spacing: 0.02em;
+
+      span:last-of-type {
+        font-size: 0.5em;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+.smallStats {
+  font-size: 0.85em;
+}

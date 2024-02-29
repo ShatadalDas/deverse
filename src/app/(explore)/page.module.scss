@@ -4,7 +4,7 @@
   grid-template-columns: 2fr 1fr;
   content: normal;
   scrollbar-width: none;
-
+  
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -12,13 +12,14 @@
   @media (width <= 40em) {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
+    padding-block-start: 0;
   }
 }
 
 .postsWrapper {
   display: grid;
   row-gap: 3em;
-  padding-inline: 0.5em;
-  padding-bottom: 2em;
+  // padding-inline: 0.5em;
+  // padding-bottom: 2em;
   height: 100%;
 }

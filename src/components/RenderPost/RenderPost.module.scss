@@ -1,12 +1,14 @@
 .renderPost {
   display: grid;
-  gap: 0.3em;
-  padding-inline: 0.6em;
+  gap: 0.5em;
   font-size: clamp(0.3rem, 2vw + 0.1rem, 0.9rem);
+
 }
 
 .normalPost {
   gap: 0.5em;
+  padding-inline: 1em;
+  padding-block-start: 1em;
   
   @media (width <= 40em) {
     font-size: clamp(0.4rem, 2.2vw + 0.1rem, 1rem);

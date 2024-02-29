@@ -34,6 +34,12 @@ body {
   @include custom-scroll-bar();
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 input,
 button,
 textarea,

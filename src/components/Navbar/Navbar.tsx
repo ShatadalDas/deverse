@@ -12,7 +12,7 @@ function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${pathname === "/profile" ? styles.profileNav : ""}`}>
       <h1 className={styles.logoWrapper}>
         <Image
           className={styles.logoImage}

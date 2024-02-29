@@ -1,0 +1,79 @@
+.profileImageSection {
+  display: flex; //? can't use grid here
+  flex-direction: column;
+  gap: 1em;
+}
+
+.profileImageWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  height: auto;
+  width: 20vw;
+  max-width: 10rem;
+  margin-inline: auto;
+
+  div {
+    position: absolute;
+    inset: 70% 0 0 0;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      #0004 10%,
+      #000000de 50%
+    );
+    background-size: 100% 200%;
+    background-position-y: auto;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      background-position-y: 10%;
+    }
+  }
+}
+
+.profileCameraIcon {
+  width: 15%;
+}
+
+.usernameWrapper {
+  display: grid;
+  gap: 0.1em;
+}
+
+.fullNameInput {
+  all: unset;
+  width: var(--width); //* set using tsx
+  margin: auto;
+  font-family: var(--cascadia-code), monospace;
+  max-width: 20ch;
+  text-overflow: ellipsis;
+  font-size: 1.3em;
+  font-weight: 600;
+  padding: 0.05em 0.3em;
+  border-radius: 0.4em;
+  
+  &:focus {
+    background-color: rgb(49, 49, 49);
+  }
+}
+
+.useridWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: auto;
+
+  p {
+    font-size: 0.7em;
+    font-family: var(--libre-franklin);
+    letter-spacing: 0.09em;
+  }
+  img {
+    width: 0.9em;
+  }
+}
+

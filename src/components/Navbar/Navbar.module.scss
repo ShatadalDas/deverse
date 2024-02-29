@@ -1,5 +1,5 @@
 .navbar {
-  --_bg-clr: #1e1e1e;
+  --bg: #1e1e1e;
 
   --logo-size: 1.3rem;
   --link-size: 0.9rem;
@@ -25,13 +25,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--_bg-clr);
+  background: var(--bg);
   padding-inline: min(2vw, 1rem);
   min-height: var(--navbar-min-height);
-  
+
   @media (width > 40em) {
     box-shadow: 0 0.5rem 1rem #0f0f0f;
   }
+}
+
+.profileNav {
+  --bg: linear-gradient(180deg, #1e1e1e 0%, rgba(30, 30, 30, 0.47) 100%);
+
+  backdrop-filter: blur(23px);
+  box-shadow: none;
 }
 
 .logoWrapper {
@@ -142,4 +149,8 @@
   height: 0.6em;
   width: auto;
   opacity: 0.4;
+}
+
+.profileNav .searchWrapper {
+  background-color: hsla(0, 0%, 13%, 0.8);
 }

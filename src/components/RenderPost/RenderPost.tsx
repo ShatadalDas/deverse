@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import EditBtn from "../PostActionButtons/EditBtn";
 import DeleteBtn from "../PostActionButtons/DeleteBtn";
+import { useEffect, useState } from "react";
 
 type NormalPost = {
   postType: "normal";
@@ -164,14 +165,15 @@ function PostActionButtons(
     | "totalComments"
     | "totalReposts"
     | "code"
-  >
-) {
-  return (
-    <>
+    >
+    ) {
+      
+      return (
+        <>
       <UpvoteDownVoteWrapper
         totalUpvotes={props.totalUpvotes}
         totalDownvotes={props.totalDownvotes}
-      />
+        />
 
       <CommentBtn totalComments={props.totalComments} />
 
@@ -186,15 +188,17 @@ function PostActionButtons(
 
 function AuthorsPostActionButtons(
   props: Pick<
-    Props,
-    | "totalUpvotes"
-    | "totalDownvotes"
-    | "totalShares"
-    | "totalComments"
-    | "totalReposts"
-    | "code"
+  Props,
+  | "totalUpvotes"
+  | "totalDownvotes"
+  | "totalShares"
+  | "totalComments"
+  | "totalReposts"
+  | "code"
+  | "date"
+  | "time"
   >
-) {
+  ) {
   return (
     <>
       <UpvoteDownVoteWrapper
@@ -210,7 +214,7 @@ function AuthorsPostActionButtons(
 
       <CopyBtn code={props.code} />
 
-      <EditBtn />
+      <EditBtn date={props.date} time={props.time} />
 
       <DeleteBtn />
     </>

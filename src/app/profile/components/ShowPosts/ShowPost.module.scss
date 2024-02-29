@@ -1,0 +1,45 @@
+.postsWrapper {
+  display: grid;
+  gap: 1.5em;
+  padding-inline: 1.2rem;
+  padding-block-end: 1rem;
+}
+
+.title {
+  display: flex;
+  gap: 0.2em;
+  align-items: flex-end;
+  height: min-content;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  position: relative;
+
+  span:first-of-type {
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  &::after {
+    $extend: 0.5em;
+
+    content: "";
+    position: absolute;
+    bottom: -20%;
+    left: -$extend;
+    width: calc(100% + ($extend) * 2);
+    height: 1px;
+    border-radius: 1000vw;
+    background-color: #464646;
+  }
+}
+
+.postCount {
+  font-size: 0.7em;
+  opacity: 0.7;
+  translate: 0 -12%;
+}
+
+.postsList {
+  display: grid;
+  gap: min(3em, 8vw);
+}

@@ -1,0 +1,58 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4em;
+}
+
+.profileInfoWrapper {
+  position: relative;
+  display: flex;
+  column-gap: min(10vw, 4em);
+  padding-inline: 1em;
+  padding: 3em 1rem 0;
+
+  @media (width <= 70em) {
+    width: 100%;
+    flex-direction: column;
+    padding-inline: 0;
+  }
+}
+
+.profileImageAndStatsWrapper {
+  display: flex;
+  gap: min(10vw, 4em);
+
+  @media (width <= 70em) {
+    justify-content: space-around;
+  }
+}
+
+.banner {
+  position: absolute;
+  inset: 0;
+  top: -8%;
+  z-index: -9;
+
+  img {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.5;
+
+    @media (width <= 70em) {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10%;
+    height: 25%;
+    background-image: linear-gradient(to bottom, #0f0f0f00 0%, #0f0f0f44 20%, #0f0f0f 70%);
+  }
+}

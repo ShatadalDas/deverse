@@ -1,0 +1,63 @@
+.bioSection {
+  display: grid;
+  position: relative;
+  background-color: hsla(0, 0%, 10%, 0.74);
+  padding: 1.5em;
+  border-radius: 0.5em;
+  row-gap: 3em;
+  height: fit-content;  
+  margin-inline: 1rem;
+  
+  @media (width < 75em) {
+    margin-block-end: 1rem;
+  }
+}
+.editIconLink {
+  position: absolute;
+  top: 1.5%;
+  right: 1.5%;
+}
+
+.editIcon {
+  width: 1.3em;
+  height: auto;
+}
+
+.bioDes {
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.linksList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
+  column-gap: 1em;
+  row-gap: 1em;
+
+  :where(li a) {
+    display: flex;
+    gap: 0.4em;
+    align-items: center;
+
+    img {
+      width: 1.1em;
+      height: auto;
+    }
+
+    span {
+      font-size: 0.75em;
+      letter-spacing: 0.04em;
+      font-family: var(--libre-franklin);
+      font-weight: 500;
+    }
+
+    &:hover {
+      span {
+        text-decoration: underline;
+        color: #57fff1;
+      }
+    }
+  }
+}
