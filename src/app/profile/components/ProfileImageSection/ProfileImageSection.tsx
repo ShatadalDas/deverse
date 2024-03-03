@@ -20,13 +20,13 @@ function ProfileImageSection() {
           alt="default profile logo"
           className={styles.profileImg}
         />
-        <div>
+        <button>
           <Image
             src={cameraIcon}
             alt="change profile image icon"
             className={styles.profileCameraIcon}
           />
-        </div>
+        </button>
       </div>
 
       <div className={styles.usernameWrapper}>

@@ -13,7 +13,7 @@
   max-width: 10rem;
   margin-inline: auto;
 
-  div {
+  button {
     position: absolute;
     inset: 70% 0 0 0;
     background-image: linear-gradient(
@@ -22,6 +22,7 @@
       #0004 10%,
       #000000de 50%
     );
+    width: 100%;
     background-size: 100% 200%;
     background-position-y: auto;
     display: grid;
@@ -32,11 +33,15 @@
     &:hover {
       background-position-y: 10%;
     }
+
+    &:focus-visible {
+      background-position-y: 10%;
+    }
   }
 }
 
 .profileCameraIcon {
-  width: 15%;
+  width: 20%;
 }
 
 .usernameWrapper {
@@ -55,9 +60,9 @@
   font-weight: 600;
   padding: 0.05em 0.3em;
   border-radius: 0.4em;
-  
+
   &:focus {
-    background-color: rgb(49, 49, 49);
+    background-color: rgba(255, 255, 255, 0.138);
   }
 }
 
@@ -72,8 +77,9 @@
     font-family: var(--libre-franklin);
     letter-spacing: 0.09em;
   }
+
   img {
     width: 0.9em;
+    filter: contrast(200%);
   }
 }
-

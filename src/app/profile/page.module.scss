@@ -10,6 +10,7 @@
   column-gap: min(10vw, 4em);
   padding-inline: 1em;
   padding: 3em 1rem 0;
+  
 
   @media (width <= 70em) {
     width: 100%;
@@ -22,27 +23,48 @@
   display: flex;
   gap: min(10vw, 4em);
 
+
   @media (width <= 70em) {
     justify-content: space-around;
+  }
+}
+
+.bannerCameraBtn {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  padding: 0.2em;
+  border-radius: 50%;
+
+  img {
+    height: clamp(1rem, 5vw + 0.1rem, 2rem);
+    width: auto;
+  }
+
+  &:where(:hover, :focus) {
+    background-color: #fff3;
   }
 }
 
 .banner {
   position: absolute;
   inset: 0;
-  top: -8%;
+  top: -15%;
   z-index: -9;
-
+  height: 88vh;
+  overflow: hidden;
+  
+  
   img {
     height: auto;
     width: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.5;
-
+    opacity: 0.3;
+    
     @media (width <= 70em) {
-      height: 100%;
       width: auto;
+      height: 200%;
     }
   }
 
@@ -52,7 +74,18 @@
     left: 0;
     right: 0;
     bottom: -10%;
-    height: 25%;
-    background-image: linear-gradient(to bottom, #0f0f0f00 0%, #0f0f0f44 20%, #0f0f0f 70%);
+    height: 10rem;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      #0f0f0f55 15%,
+      #0f0f0f 60%
+      );
+      // background-color: #fff;
+      z-index: 1;
+      
+    //   @media (width <= 70em) {
+    //     height: 25%;        
+    // }
   }
 }

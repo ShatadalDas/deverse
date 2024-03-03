@@ -112,7 +112,8 @@
 
 .profileActive {
   opacity: 1;
-  filter: drop-shadow(0 0 3px #fff);
+  filter: drop-shadow(0 0 0.3rem rgba(56, 252, 252, 0.813));
+  scale: 1.1;
 }
 
 .exploreIcon {
@@ -131,9 +132,9 @@
   width: 30vw;
   max-width: 10rem;
 
-  // @media (width > 40em) {
-  //   display: none;
-  // }
+  &:focus-within {
+    outline: 1px solid #fff;
+  }
 }
 
 .searchInput {
@@ -152,5 +153,5 @@
 }
 
 .profileNav .searchWrapper {
-  background-color: hsla(0, 0%, 13%, 0.8);
+  background-color: hsla(0, 0%, 0%, 0.39);
 }
