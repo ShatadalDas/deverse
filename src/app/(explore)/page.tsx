@@ -1,6 +1,7 @@
 import styles from "./page.module.scss";
 import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
 import { HashtagAside, Carousel, RenderPost } from "@/components";
+import Share from "./components/Share/Share";
 
 const code = `
 async function Explore() {
@@ -47,9 +48,16 @@ const hashtags = [
   "cpp1",
 ];
 
-async function Explore() {
+type Props = {
+  searchParams?: {
+    share?: string;
+  };
+};
+
+async function Explore({ searchParams }: Props) {
   return (
     <main className={styles.explore}>
+      {searchParams?.share && <Share postId={searchParams.share} />}
       <Carousel hashtags={hashtags} />
 
       <ul className={styles.postsWrapper}>

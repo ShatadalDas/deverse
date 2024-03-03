@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./ShareBtn.module.scss";
 import shareIcon from "@/assets/share-icon.png";
 import formatNumberWithAbbreviation from "@/utils/formatNumberWithAbbreviation";
+import Link from "next/link";
 
 type Props = {
   totalShares: number;
@@ -9,12 +10,14 @@ type Props = {
 
 function ShareBtn({ totalShares }: Props) {
   return (
-    <button
-      className={`${styles.share} ${styles.succes}`}
-      data-count={formatNumberWithAbbreviation(totalShares)}
-    >
-      <Image src={shareIcon} alt="share icon" />
-    </button>
+    <Link href={"?share=123456"}>
+      <button
+        className={`${styles.share} ${styles.succes}`}
+        data-count={formatNumberWithAbbreviation(totalShares)}
+      >
+        <Image src={shareIcon} alt="share icon" />
+      </button>
+    </Link>
   );
 }
 export default ShareBtn;
