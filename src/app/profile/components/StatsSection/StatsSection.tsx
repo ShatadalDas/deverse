@@ -1,9 +1,9 @@
 import styles from "./StatsSection.module.scss";
-import { useId } from "react";
 import Image from "next/image";
 
 import formatNumberWithAbbreviation from "@/utils/formatNumberWithAbbreviation";
 import infoIcon from "@/assets/info-icon.svg";
+import { useUniqueId } from "@/hooks";
 
 function StatsSection() {
   const uniqueId = useUniqueId();
@@ -18,7 +18,7 @@ function StatsSection() {
           </div>
           <p>
             {formatNumberWithAbbreviation(1504, false).map((el) => (
-              <span key={uniqueId}>{el}</span>
+              <span key={uniqueId()}>{el}</span>
             ))}
           </p>
         </div>
@@ -29,7 +29,7 @@ function StatsSection() {
           </div>
           <p>
             {formatNumberWithAbbreviation(1504, false).map((el) => (
-              <span key={uniqueId}>{el}</span>
+              <span key={uniqueId()}>{el}</span>
             ))}
           </p>
         </div>
@@ -43,7 +43,7 @@ function StatsSection() {
           </div>
           <p>
             {formatNumberWithAbbreviation(1504, false).map((el) => (
-              <span key={uniqueId}>{el}</span>
+              <span key={uniqueId()}>{el}</span>
             ))}
           </p>
         </div>
@@ -55,7 +55,7 @@ function StatsSection() {
           </div>
           <p>
             {formatNumberWithAbbreviation(1504, false).map((el) => (
-              <span key={uniqueId}>{el}</span>
+              <span key={uniqueId()}>{el}</span>
             ))}
           </p>
         </div>

@@ -83,3 +83,18 @@
     filter: contrast(200%);
   }
 }
+
+.userName {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  span {
+    font-weight: 700;
+    font-size: 1.4em;
+    font-family: var(--libre-franklin);
+    white-space: nowrap;
+  }
+
+  
+}

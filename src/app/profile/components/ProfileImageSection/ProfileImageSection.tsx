@@ -6,6 +6,7 @@ import Link from "next/link";
 import cameraIcon from "@/assets/camera-icon.svg";
 import logoutIcon from "@/assets/logout-icon.svg";
 import { CSSProperties, useState } from "react";
+import editIcon from "@/assets/edit-icon-2.svg";
 
 function ProfileImageSection() {
   const [fullName, setFullName] = useState("John Doe");
@@ -30,14 +31,12 @@ function ProfileImageSection() {
       </div>
 
       <div className={styles.usernameWrapper}>
-        <input
-          type="text"
-          defaultValue={fullName}
-          placeholder={"name can't be empty"}
-          className={styles.fullNameInput}
-          onChange={(e) => setFullName(e.target.value)}
-          style={{ "--width": fullName.length + "ch" } as CSSProperties}
-        />
+        <div className={styles.userName}>
+          <span>{fullName}</span>
+          <button>
+            <Image src={editIcon} alt="" />
+          </button>
+        </div>
 
         <div className={styles.useridWrapper}>
           <p className={styles.userid}>{"@johndoe123"}</p>

@@ -17,6 +17,7 @@ import codechefIcon from "@/assets/codechef-icon.svg";
 import codeforcesIcon from "@/assets/codeforces-icon.svg";
 import { useId } from "react";
 import { usePathname } from "next/navigation";
+import { useUniqueId } from "@/hooks";
 
 const links = [
   [websiteIcon, "johndoe.com", "/"],
@@ -47,7 +48,7 @@ function BioSection() {
 
       <ul className={styles.linksList}>
         {links.map((linkData) => (
-          <li key={uniqueId}>
+          <li key={uniqueId()}>
             <Link href={linkData[2]}>
               <Image src={linkData[0]} alt="" />
               <span>{linkData[1]}</span>
