@@ -80,11 +80,18 @@
   }
 }
 
-.codeTextArea {
-  font-family: var(--cascadia-code);
+.codeWrapper {
+  max-height: fit-content;
 }
 
 .codeWrapper label {
   position: relative;
   width: fit-content;
+}
+
+.codeWrapper > div {
+  border-radius: 0.5em;
+  overflow: hidden;
+  padding-block-start: 1rem;
+  background-color: #1e1e1e;
 }

@@ -1,4 +1,4 @@
-.clipboard {
+button.clipboard {
   &::after {
     content: attr(data-text);
   }

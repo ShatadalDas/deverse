@@ -1,17 +1,25 @@
+"use client";
+
 import { GradientBtn } from "@/components";
 import styles from "./page.module.scss";
 import langArr from "@/utils/langArr";
-import CodeTextArea from "./components/CodeTextArea";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useUniqueId } from "@/hooks";
+import { Editor } from "@monaco-editor/react";
 
 function Post() {
-  async function onSubmit() {
-    "use server";
+  const router = useRouter();
+  const [languageSelected, setLanguageSelected] = useState("python");
+  const [codeStr, setCodeStr] = useState<string>();
+  const uniqueId = useUniqueId();
 
-    console.log("Hello World");
-  }
+  useEffect(() => {
+    router.push("/post?lang=" + languageSelected);
+  }, [languageSelected]);
 
   return (
-    <form action={onSubmit} className={styles.postForm}>
+    <form className={styles.postForm}>
       <section className={styles.leftSection}>
         <div className={styles.descriptionWrapper}>
           <label htmlFor="post-description">Description</label>
@@ -38,18 +46,30 @@ function Post() {
           </label>
           <select
             id="select-language"
-            defaultValue={"python"}
+            value={languageSelected}
             className={styles.dropDownMenu}
+            onChange={(e) => setLanguageSelected(e.target.value)}
           >
             {langArr.map((lang) => (
-              <option value={lang}>{lang}</option>
+              <option value={lang} key={uniqueId()}>
+                {lang}
+              </option>
             ))}
           </select>
           <GradientBtn text="Done" className={styles.gradientBtn} />
         </div>
         <div className={styles.codeWrapper}>
           <label htmlFor="code-input">Code</label>
-          <CodeTextArea styles={styles} />
+          <textarea id="code-input" className="sr-only" value={codeStr} />
+          <div aria-hidden>
+            <Editor
+              language="python"
+              theme="vs-dark"
+              className={styles.codeEditor}
+              value={codeStr}
+              onChange={(e) => setCodeStr(e)}
+            />
+          </div>
         </div>
       </section>
     </form>

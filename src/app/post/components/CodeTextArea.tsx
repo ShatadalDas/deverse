@@ -1,6 +1,7 @@
 "use client";
 
 import { KeyboardEvent, useState } from "react";
+import { Editor } from "@monaco-editor/react";
 
 type Props = {
   styles: {

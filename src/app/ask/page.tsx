@@ -1,10 +1,10 @@
 "use client";
 
 import { GradientBtn, MarkdownRenderer } from "@/components";
-import { useLocalStorage, useWindowSize } from "@uidotdev/usehooks";
-import { KeyboardEvent, useEffect, useState } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
+import { KeyboardEvent, useState } from "react";
 import styles from "./page.module.scss";
-import useDefinedLocalStorage from "@/hooks/useDefinedLocalStorage";
+import { useDefinedLocalStorage } from "@/hooks";
 
 function Ask() {
   const [des, setDes] = useState("");

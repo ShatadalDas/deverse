@@ -6,7 +6,7 @@ import formatNumberWithAbbreviation from "@/utils/formatNumberWithAbbreviation";
 import infoIcon from "@/assets/info-icon.svg";
 
 function StatsSection() {
-  const uniqueId = useId();
+  const uniqueId = useUniqueId();
 
   return (
     <section className={styles.statsSection}>

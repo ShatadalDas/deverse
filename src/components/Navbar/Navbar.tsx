@@ -5,14 +5,20 @@ import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import searchIcon from "@/assets/search-icon.png";
+import { useUniqueId } from "@/hooks";
 
 const links = ["explore", "post", "forum", "ask", "profile"];
 
 function Navbar() {
   const pathname = usePathname();
+  const uniqueId = useUniqueId();
 
   return (
-    <nav className={`${styles.navbar} ${pathname === "/profile" ? styles.profileNav : ""}`}>
+    <nav
+      className={`${styles.navbar} ${
+        pathname === "/profile" ? styles.profileNav : ""
+      }`}
+    >
       <h1 className={styles.logoWrapper}>
         <Image
           className={styles.logoImage}
@@ -26,14 +32,18 @@ function Navbar() {
       </h1>
       <ul className={styles.linkWrapper}>
         <li className={styles.searchWrapper}>
-          <Image src={searchIcon} alt="" className={styles.searchIcon}/>
-          <input type="search" className={styles.searchInput} placeholder="search" />
+          <Image src={searchIcon} alt="" className={styles.searchIcon} />
+          <input
+            type="search"
+            className={styles.searchInput}
+            placeholder="search"
+          />
         </li>
 
         {links.map((link, i) => {
           if (link === "explore") {
             return (
-              <li key={i}>
+              <li key={uniqueId()}>
                 <Link
                   href="/"
                   className={`${styles.linkText} ${
@@ -46,7 +56,7 @@ function Navbar() {
             );
           } else if (link === "profile") {
             return (
-              <li key={i}>
+              <li key={uniqueId()}>
                 <Link href="/profile">
                   <Image
                     src="/user.png"
@@ -62,7 +72,7 @@ function Navbar() {
             );
           } else {
             return (
-              <li key={i}>
+              <li key={uniqueId()}>
                 <Link
                   href={"/" + link}
                   className={`${styles.linkText} ${

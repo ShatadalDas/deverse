@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styles from "./BioSection.module.scss";
 import Image from "next/image";
@@ -31,9 +31,8 @@ const links = [
 ];
 
 function BioSection() {
-  const uniqueId = useId();
+  const uniqueId = useUniqueId();
   const pathname = usePathname();
-
 
   return (
     <section className={styles.bioSection}>
