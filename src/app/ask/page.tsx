@@ -77,7 +77,7 @@ function Ask() {
       {windowWidth && windowWidth > 640 && (
         <aside className={styles.markdownSection}>
           <p>Preview</p>
-          <MarkdownRenderer text={des} />
+          <MarkdownRenderer content={des} />
         </aside>
       )}
     </>

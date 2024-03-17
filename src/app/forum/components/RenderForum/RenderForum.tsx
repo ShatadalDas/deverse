@@ -21,7 +21,7 @@ function RenderForum({
 }: Props) {
   return (
     <li className={styles.renderForum}>
-      <Link href="#" className={styles.linkWrapper}>
+      <Link href="/forum/28736455234" className={styles.linkWrapper}>
         <h2>{title}</h2>
         <p>{metaDescription}</p>
       </Link>

@@ -30,6 +30,7 @@ function Navbar() {
         />
         <p className={styles.logoText}>Deverse</p>
       </h1>
+      
       <ul className={styles.linkWrapper}>
         <li className={styles.searchWrapper}>
           <Image src={searchIcon} alt="" className={styles.searchIcon} />

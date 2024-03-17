@@ -1,7 +1,6 @@
 import styles from "./page.module.scss";
 import { LanguagesAllowed } from "@/components/CodeHighlighter/CodeHighlighter";
-import { HashtagAside, Carousel, RenderPost } from "@/components";
-import Share from "./components/Share/Share";
+import { HashtagAside, Carousel, RenderPost, Share } from "@/components";
 
 const code = `
 async function Explore() {

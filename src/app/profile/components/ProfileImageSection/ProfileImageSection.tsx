@@ -5,8 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import cameraIcon from "@/assets/camera-icon.svg";
 import logoutIcon from "@/assets/logout-icon.svg";
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import editIcon from "@/assets/edit-icon-2.svg";
+
+
 
 function ProfileImageSection() {
   const [fullName, setFullName] = useState("John Doe");
