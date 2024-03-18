@@ -15,6 +15,7 @@
   color: #ffffff;
 
   text-shadow: 0 0 1em #00000080;
+  height: min-content;
 
   &:hover {
     filter: brightness(105%);

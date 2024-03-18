@@ -137,19 +137,17 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 0.5em;
-  align-items: end;
   padding-block-end: 1em;
+  align-items: end;
   border-bottom: 1px solid #575757;
   margin-block-end: 1em;
 
-  & > * {
-    height: min-content;
-  }
+
   
   @include styled-textarea() {
     height: calc(4rem + 5vw);
     font-size: 0.8em;
-    padding-inline: 1em;
+    padding: 1em;
     font-weight: 700;
     letter-spacing: 0.1em;
     font-family: var(--cascadia-code);

@@ -12,7 +12,6 @@ import {
 import Link from "next/link";
 import EditBtn from "../PostActionButtons/EditBtn";
 import DeleteBtn from "../PostActionButtons/DeleteBtn";
-import { useEffect, useState } from "react";
 
 type NormalPost = {
   postType: "normal";
@@ -47,6 +46,7 @@ type Props = (NormalPost | ProfileSectionPost) & {
   totalComments: number;
   totalShares: number;
   totalReposts: number;
+  className?: string;
 };
 
 async function RenderPost(props: Props) {
@@ -54,7 +54,7 @@ async function RenderPost(props: Props) {
     <li
       className={`${styles.renderPost} ${
         props.postType === "normal" ? styles.normalPost : ""
-      }`}
+      } ${props.className}`}
     >
       {props.postType === "normal" ? (
         <NormalPostInfoUI {...props} />

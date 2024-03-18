@@ -41,12 +41,26 @@ function ViewPost() {
   return !searchParams.get("id") ? (
     <NoPostId />
   ) : (
-    <main>
+    <main className={styles.postViewWrapper}>
       <RenderPost postType="normal" {...postDetails} />
-      <div>
-        <textarea />
-        <GradientBtn text="Done" />
-      </div>
+
+      <p className={styles.commentsTitle}>
+        <span>Comments</span>
+        <span>{`( ${120} )`}</span>
+      </p>
+      <form className={styles.textareaWrapper}>
+        <label htmlFor="comment" className="sr-only">
+          Comment
+        </label>
+        <textarea
+          id="comment"
+          placeholder="write your comment"
+          name="comment"
+          className={styles.commentTextarea}
+        />
+        <GradientBtn text="Done" className={styles.gradientBtn} />
+      </form>
+
       <ul></ul>
     </main>
   );

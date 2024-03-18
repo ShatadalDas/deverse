@@ -1,0 +1,48 @@
+@use "@/scss/mixin.scss" as *;
+
+.postViewWrapper {
+  display: grid;
+  row-gap: 0.3em;
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.commentsTitle {
+  display: flex;
+  gap: 0.4em;
+  align-items: flex-end;
+  font-size: 1.1em;
+  margin-inline: 1em;
+
+  span:first-of-type {
+    font-weight: 700;
+    font-style: italic;
+  }
+  span:last-of-type {
+    font-size: 0.7em;
+    opacity: 0.8;
+    translate: 0 -0.2em;
+  }
+}
+
+.textareaWrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  column-gap: 0.5em;
+  height: 5rem;
+  margin-inline: 1em;
+  padding-block-end: 1em;
+  border-bottom: 1px solid #4b4b4b;
+
+  @include styled-textarea() {
+    height: 100%;
+    font-size: 0.8em;
+    font-weight: 400;
+    padding: 0.5em 1em;
+  };
+}
+
+button.gradientBtn {
+  font-size: 0.8em;
+}
