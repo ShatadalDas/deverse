@@ -150,9 +150,10 @@
     height: calc(4rem + 5vw);
     font-size: 0.8em;
     padding-inline: 1em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: var(--cascadia-code);
   }
-
-
 }
 
 button.doneBtn {
