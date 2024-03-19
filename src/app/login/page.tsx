@@ -1,4 +1,4 @@
-import { LogoBg, SignupLoginStructure } from "@/components";
+import { SignupLoginStructure } from "@/components";
 import styles from "./page.module.scss";
 
 function Login() {
