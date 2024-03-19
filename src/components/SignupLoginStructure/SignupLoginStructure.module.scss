@@ -1,0 +1,217 @@
+.container {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - var(--navbar-min-height));
+  font-size: clamp(0.8rem, 2.5vw + 0.1rem, 1.1rem);
+  padding-block-start: 0.5em;
+}
+
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  width: 90%;
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-inline: 1em;
+
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.title {
+  width: fit-content;
+  font-size: 2em;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.inputFieldsWrapper {
+  width: 100%;
+  display: grid;
+  row-gap: 0.8em;
+
+  
+  
+  div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background-color: #191919;
+    align-items: center;
+    padding: 0 0.6em;
+    border-radius: 0.3em;
+    width: 100%;
+    height: 2.3em;
+    overflow: hidden;    
+
+    &:focus-within {
+      outline: 1px solid yellow;
+    }
+  
+    svg {
+      height: 50%;
+      cursor: pointer;
+    }
+
+    input {
+      all: unset;
+      width: 100%;
+      font-size: 0.8em;
+      letter-spacing: 0.11em;
+    }
+  }
+}
+
+
+
+
+.linkWrapper {
+  font-size: 0.6em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+
+  p {
+    background-color: #0D0D0D;
+    padding-inline-start: 0.5em;
+    color: #969696;
+  }
+  
+  a {
+    font-size: 1.3em;
+    font-family: var(--libre-franklin);
+    font-weight: 500;
+    color: #14FFED;
+    background-color: #0D0D0D;
+    padding-inline: 0.7em 0.5em;
+
+    &:is(:hover, :focus-visible) {
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    translate: 0 -50%;
+    z-index: -1;
+
+    height: 5%;
+    background-color: #3e3e3e;
+  }
+}
+
+.thirdPartySignUpLoginSection {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  column-gap: 1em;
+  
+  @media (width <= 40em) {
+    column-gap: 2em;
+    row-gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  button {
+    @media (width <= 40em) {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    &:focus div {
+      outline: 2px solid yellow;
+    }
+  }
+
+  div {
+    background-color: #1e1e1e;
+    width: 2.5em;
+    aspect-ratio: 1;
+    
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    @media (width <= 40em) {
+      width: 2em;
+    }
+    
+    &:after {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background-image: linear-gradient(to top right, transparent 0% 40%, rgba(255, 255, 255, 0.1) 50% 60%, transparent 70% 100%);
+
+      z-index: -1;
+      translate: -45% 45%;
+      
+      transition: translate 500ms ease-in-out;
+    }
+    
+    &:hover::after {
+      translate: 30% -30%;
+    }
+
+    img {
+      height: 1.2em;
+      width: auto;
+      
+      @media (width <= 40em) {
+        height: 1em;
+      }
+    }
+    
+    .microsoftIcon {
+      height: 1em;
+      @media (width <= 40em) {
+        height: 0.8em;
+      }
+    }
+  }
+
+  
+  p {
+    font-size: 0.8em;
+    font-family: var(--libre-franklin);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+
+    @media (width > 40em) {
+      display: none;
+    }
+  }
+}
+
+button.gradientBtn {
+  font-size: clamp(0.7rem, 0.8em, 1rem);
+  border-radius: 1000vw;
+  padding: 0.5em 1.5em;
+  width: min-content;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  margin-block-end: 1em;
+}
