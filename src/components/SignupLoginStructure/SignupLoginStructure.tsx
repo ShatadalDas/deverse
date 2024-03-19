@@ -122,7 +122,7 @@ function SignupLoginStructure({
             </section>
 
             <section className={styles.linkWrapper}>
-              <p>{type === "sign-up" ? "Don't have an account ?" : "Already have an account ?"}</p>
+              <p>{type === "login" ? "Don't have an account ?" : "Already have an account ?"}</p>
               <Link href={type === "sign-up" ? "/login" : "/sign-up"}>
                 {linkText}
               </Link>
