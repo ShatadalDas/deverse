@@ -1,12 +1,8 @@
-import { SignupLoginStructure, ToastMsg } from "@/components";
-import { useState } from "react";
+import { SignupLoginStructure } from "@/components";
 
 function SignUp() {
-
-
   return (
     <>
-
       <SignupLoginStructure
         title="Create an account"
         type="sign-up"
