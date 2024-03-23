@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import conn from "./db/conn";
 import UserModel from "./db/models/UserModel";
