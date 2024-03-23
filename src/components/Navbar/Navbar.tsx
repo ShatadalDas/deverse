@@ -3,22 +3,38 @@
 import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import searchIcon from "@/assets/search-icon.png";
 import { useUniqueId } from "@/hooks";
+import { useCookies } from "next-client-cookies";
+import { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const links = ["explore", "post", "forum", "ask", "profile"];
 
 function Navbar() {
-  const pathname = usePathname();
   const uniqueId = useUniqueId();
+  const cookies = useCookies();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const authToken = cookies.get("auth");
+    if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
+      router.push("/sign-up");
+    } else if (
+      authToken &&
+      (pathname === "/sign-up" || pathname === "/login")
+    ) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <nav
       className={`${styles.navbar} ${
         pathname === "/profile" ? styles.profileNav : ""
       } ${
-        (pathname === "/sign-up" || pathname === "/login") ? styles.middleNav : ""
+        pathname === "/sign-up" || pathname === "/login" ? styles.middleNav : ""
       }`}
     >
       <h1 className={styles.logoWrapper}>

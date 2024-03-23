@@ -16,7 +16,7 @@ function Post() {
 
   useEffect(() => {
     router.push("/post?lang=" + languageSelected);
-  }, [languageSelected]);
+  }, [router, languageSelected]);
 
   return (
     <form className={styles.postForm}>

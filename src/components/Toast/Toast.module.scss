@@ -1,0 +1,61 @@
+.toastWrapper {
+  --toast-clr: hsl(0, 100%, 22%);
+
+  position: fixed;
+  z-index: 99;
+  top: calc(var(--navbar-min-height) + 0.5em);
+  right: 0.8em;
+  background-color: var(--toast-clr);
+  font-size: calc(clamp(0.7rem, 3vw + 0.1rem, 1.1rem) * 0.8);
+  padding: 0.5em 0.7em;
+  align-items: center;
+  display: none;
+  gap: 1em;
+  border-radius: 0.3em;
+  box-shadow: 0 0 2em var(--toast-clr);
+  outline: 0.1px solid rgba(255, 0, 0, 0.671);
+}
+
+.toastOpen {
+  display: flex;
+  scale: 0;
+  animation: grow 50ms forwards;
+}
+
+@keyframes grow {
+  to {
+    scale: 1;
+  }
+}
+
+.toastClose {
+  display: none;
+}
+
+.toastSuccess {
+  --toast-clr: hsl(120, 100%, 22%);
+  outline: 0.1px solid hsla(120, 100%, 50%, 0.7);
+}
+
+.statusCode {
+  font-family: var(--libre-franklin);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 0.1em #000;
+}
+
+.message {
+  font-family: var(--libre-franklin);
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  font-size: 0.9em;
+}
+
+.closeBtn {
+  width: fit-content;
+
+  img {
+    width: 1em;
+    height: auto;
+  }
+}

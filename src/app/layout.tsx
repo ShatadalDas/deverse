@@ -3,6 +3,8 @@ import "./globals.scss";
 import { ReactNode } from "react";
 import { CascadiaCode, InriaSans, LibreFranklin } from "@/fonts";
 import { Navbar } from "@/components";
+import { CookiesProvider } from "next-client-cookies/server";
+import ToastProvider from "@/utils/ToastProvider";
 
 export const metadata: Metadata = {
   title: "Deverse",
@@ -21,8 +23,12 @@ export default function RootLayout({ children }: Props) {
       className={`${CascadiaCode.variable} ${InriaSans.variable} ${LibreFranklin.variable}`}
     >
       <body>
-        <Navbar />
-        {children}
+        <CookiesProvider>
+          <ToastProvider>
+            <Navbar />
+            {children}
+          </ToastProvider>
+        </CookiesProvider>
       </body>
     </html>
   );
