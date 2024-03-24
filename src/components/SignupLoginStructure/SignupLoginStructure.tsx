@@ -229,6 +229,7 @@ function SignupLoginStructure({
                   id="password"
                   placeholder="password"
                   {...register("password")}
+                  autoComplete="off"
                 />
                 <button
                   type="button"
@@ -280,6 +281,7 @@ function SignupLoginStructure({
                       id="confirmPassword"
                       placeholder="confirm password"
                       {...register("confirmPassword")}
+                      autoComplete="off"
                     />
                     <button
                       type="button"
