@@ -5,6 +5,7 @@ import { CascadiaCode, InriaSans, LibreFranklin } from "@/fonts";
 import { Navbar } from "@/components";
 import { CookiesProvider } from "next-client-cookies/server";
 import ToastProvider from "@/utils/ToastProvider";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Deverse",

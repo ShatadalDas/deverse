@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import conn from "./db/conn";
-import UserModel from "./db/models/UserModel";
-import json from "./utils/json";
+import json from "../utils/json";
+import UserModel from "../db/models/UserModel";
+import conn from "../db/conn";
 
 export async function GET(req: NextRequest) {
   try {
@@ -10,28 +10,17 @@ export async function GET(req: NextRequest) {
 
     if (!authToken) {
       return json({
-        error: "Auth Token Not Provided",
+        body: undefined,
+        error: "Bad Request",
         status: 400,
       });
     }
 
-    let _id: string;
-
-    try {
-      const jwtObj = jwt.verify(
-        authToken,
-        process.env.JWT_SECRET
-      ) as JwtPayload;
-
-      _id = jwtObj["_id"];
-
-    } catch (e: any) {
-      console.log(e.message);
-
+    if (!jwt.verify(authToken, process.env.JWT_SECRET)) {
       return json({
         body: undefined,
-        error: "Invalid Auth Token",
-        status: 400,
+        error: "Authorization Failed",
+        status: 401,
       });
     }
 
@@ -39,34 +28,37 @@ export async function GET(req: NextRequest) {
 
     if (!dbConnected) {
       return json({
-        error: "Unable to connect to database",
+        body: undefined,
+        error: "Database connection failed",
         status: 500,
       });
     }
+
+    const decodedJwt = jwt.decode(authToken) as JwtPayload;
+    const _id = decodedJwt["_id"];
 
     const user = await UserModel.findById(_id);
 
     if (!user) {
       return json({
         body: undefined,
-        error: "User not found",
-        status: 400,
+        error: "Credentials didn't match",
+        status: 404,
       });
     }
 
     return json({
       body: {
-        firstname: user["firstname"],
-        lastname: user["lastname"],
-        email: user["email"],
-        userId: user["userId"],
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        userId: user.userId,
       },
       error: undefined,
       status: 200,
     });
-  } catch (e: any) {
-    console.log(e.message);
-
+  } catch (err: any) {
+    console.log(err.message);
     return json({
       body: undefined,
       error: "Internal Server Error",

@@ -4,10 +4,11 @@ import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import searchIcon from "@/assets/search-icon.png";
-import { useUniqueId } from "@/hooks";
+import { useToast, useUniqueId } from "@/hooks";
 import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import axios, { AxiosError } from "axios";
 
 const links = ["explore", "post", "forum", "ask", "profile"];
 
@@ -16,18 +17,60 @@ function Navbar() {
   const cookies = useCookies();
   const router = useRouter();
   const pathname = usePathname();
+  const toast = useToast();
 
-  useEffect(() => {
+  function checkAuthToken() {
     const authToken = cookies.get("auth");
     if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
-      router.push("/sign-up");
+      toast?.show("error", "Please login first!", 401);
+      router.push("/login");
     } else if (
       authToken &&
       (pathname === "/sign-up" || pathname === "/login")
     ) {
       router.push("/");
+    } else if (authToken) {
+      const source = axios.CancelToken.source();
+
+      axios
+        .get("/api/auth", {
+          headers: {
+            Authorization: "Bearer " + authToken,
+          },
+          cancelToken: source.token,
+          timeout: 900,
+        })
+        .then((res) => {
+          const status = res.data["status"];
+
+          if (status >= 400 && status < 500) {
+            toast?.show("error", res.data["error"], res.data["status"]);
+            cookies.remove("auth");
+            router.push("/login");
+          } else if (status >= 500) {
+            toast?.show("error", res.data["error"], res.data["status"]);
+            cookies.remove("auth");
+            router.push("/login");
+          }
+        })
+        .catch((e: AxiosError) => {
+          if (axios.isCancel(e)) {
+            toast?.show("error", "Request timed out", 408);
+          } else {
+            toast?.show("error", "Something went wrong", 500);
+          }
+          console.log(e.message);
+        });
     }
-  }, []);
+  }
+
+  setInterval(() => {
+    checkAuthToken();
+  }, 1 * 60 * 1000); // 1 mins
+
+  useEffect(() => {
+    checkAuthToken();
+  });
 
   return (
     <nav

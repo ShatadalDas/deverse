@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import conn from "../db/conn";
-import UserModel from "../db/models/UserModel";
-import json from "../utils/json";
-import cryptrObj from "../utils/cryptrObj";
+import conn from "@/app/api/db/conn";
+import UserModel from "@/app/api/db/models/UserModel";
+import json from "@/app/api/utils/json";
+import cryptrObj from "@/app/api/utils/cryptrObj";
 import { LoginUserSchema as RequestBodySchema } from "@/utils/zodSchema";
 
 export async function POST(req: NextRequest) {
@@ -67,13 +67,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const signedJWT = jwt.sign(
-      { _id: user._id },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "30d",
-      }
-    );
+    const signedJWT = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
 
     const response = json({
       body: {

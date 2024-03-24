@@ -72,7 +72,7 @@ function SignupLoginStructure({
     });
 
     try {
-      const res = await axios.post(`/api/${type}`, formData);
+      const res = await axios.post(`/api/auth/${type}`, formData);
       if (res.data["status"] >= 200 && res.data["status"] < 300) {
         const successMessage =
           type === "login"

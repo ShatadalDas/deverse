@@ -31,7 +31,7 @@ function ToastProvider({ children }: { children: ReactNode }) {
 
     setTimeout(() => {
       setIsVisible(false);
-    }, 3000);
+    }, 10 * 1000); // 10 sec
   };
 
   const hide = () => {
