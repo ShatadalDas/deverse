@@ -30,7 +30,7 @@ function Navbar() {
       (pathname === "/sign-up" || pathname === "/login")
     ) {
       router.push("/");
-    } else if (authToken) {
+    } else if (authToken && pathname !== "/sign-up" && pathname !== "/login") {
       const source = axios.CancelToken.source();
       axios
         .get("/api/auth", {
@@ -43,8 +43,10 @@ function Navbar() {
         .then((res) => {
           const status = res.data["status"];
 
-          if (status >= 400) {
+          if (parseInt(status) >= 400) {
             toast?.show("error", res.data["error"], res.data["status"]);
+            console.log("Removing auth")
+            console.log(res.data)
             cookies.remove("auth");
             router.push("/login");
           }
