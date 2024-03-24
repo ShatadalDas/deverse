@@ -6,7 +6,6 @@ import json from "../utils/json";
 import cryptrObj from "../utils/cryptrObj";
 import { LoginUserSchema as RequestBodySchema } from "@/utils/zodSchema";
 
-
 export async function POST(req: NextRequest) {
   try {
     const requestBodyJson = await req.json();
@@ -31,19 +30,24 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const userWithEmail = await UserModel.findOne({ email: parsedReqBody.email });
+    let user;
 
-    if (!userWithEmail) {
+    if (parsedReqBody.email) {
+      user = await UserModel.findOne({ email: parsedReqBody.email });
+    }
+
+    if (parsedReqBody.email && !user) {
       return json({
         body: undefined,
         error: "Invalid Email",
         status: 400,
       });
     }
+    if (parsedReqBody.userId) {
+      user = await UserModel.findOne({ userId: parsedReqBody.userId });
+    }
 
-    const userWithUserID = await UserModel.findOne({ userId: parsedReqBody.userId });
-
-    if (!userWithUserID) {
+    if (parsedReqBody.userId && !user) {
       return json({
         body: undefined,
         error: "Invalid userId",
@@ -51,12 +55,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    let storedPassword;
-    if(userWithEmail) {
-      storedPassword = userWithEmail["password"];
-    } else {
-      storedPassword = userWithUserID["password"];
-    }
+    let storedPassword = user["password"];
 
     const decrptedPassword = cryptrObj.decrypt(storedPassword);
 
@@ -68,16 +67,21 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const signedJWT = jwt.sign({ _id: userWithEmail._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    const signedJWT = jwt.sign(
+      { _id: user._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "30d",
+      }
+    );
 
     const response = json({
       body: {
-        _id: userWithEmail._id,
-        firstname: userWithEmail.firstname,
-        lastname: userWithEmail.lastname,
-        email: userWithEmail.email,
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        userId: user.userId,
       },
       error: undefined,
       status: 200,

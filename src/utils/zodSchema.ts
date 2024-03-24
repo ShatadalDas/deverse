@@ -67,18 +67,32 @@ export const SignUpUserSchema = z
 
 export const LoginUserSchema = z
   .object({
-    email: z.string().email({
-      message: "Invalid email",
-    }),
+    email: z
+      .string()
+      .optional()
+      .refine((data) => {
+        if (data) {
+          return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data);
+        }
+        return true;
+      }),
     userId: z
       .string()
-      .min(4, {
-        message: "userId must be atleast 4 characters",
+      .optional()
+      .refine((data) => {
+        if (data && data.length < 1) {
+          return false;
+        } else {
+          return true;
+        }
       })
       .refine(
         (data) => {
-          const regex = /^[a-zA-Z0-9_]+$/;
-          return regex.test(data);
+          if (data) {
+            const regex = /^[a-zA-Z0-9_]+$/;
+            return regex.test(data);
+          }
+          return true;
         },
         {
           message: "Invalid userId format",
@@ -87,7 +101,7 @@ export const LoginUserSchema = z
     password: z.string().min(8).max(300),
   })
   .strict()
-  .refine((data) => !(data.email.length > 0 && data.userId.length > 0), {
+  .refine((data) => !(data.email && data.userId), {
     message: "Enter either email or userId",
     path: ["userId", "email"],
   });
