@@ -43,11 +43,7 @@ function Navbar() {
         .then((res) => {
           const status = res.data["status"];
 
-          if (status >= 400 && status < 500) {
-            toast?.show("error", res.data["error"], res.data["status"]);
-            cookies.remove("auth");
-            router.push("/login");
-          } else if (status >= 500) {
+          if (status >= 400) {
             toast?.show("error", res.data["error"], res.data["status"]);
             cookies.remove("auth");
             router.push("/login");
@@ -71,6 +67,7 @@ function Navbar() {
   useEffect(() => {
     checkAuthToken();
   });
+
 
   return (
     <nav
