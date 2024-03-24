@@ -190,7 +190,7 @@ function SignupLoginStructure({
                   id="email"
                   placeholder="email"
                   {...register("email")}
-                  disabled={userIdLength > 0}
+                  disabled={type === "login" && userIdLength > 0}
                   onChange={(e) => setEmailLength(e.target.value.length)}
                 />
               </div>
@@ -213,7 +213,7 @@ function SignupLoginStructure({
                   type="text"
                   id="userId"
                   placeholder="userId"
-                  disabled={emailLength > 0}
+                  disabled={type === "login" && emailLength > 0}
                   {...register("userId")}
                   onChange={(e) => setUserIdLength(e.target.value.length)}
                 />
