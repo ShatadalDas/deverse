@@ -51,6 +51,8 @@ function SignupLoginStructure({
   const router = useRouter();
   const toast = useToast();
 
+  const [emailLength, setEmailLength] = useState(0);
+  const [userIdLength, setUserIdLength] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -71,13 +73,13 @@ function SignupLoginStructure({
 
     try {
       const res = await axios.post(`/api/${type}`, formData);
-      if (res.data["status"] === 200) {
+      if (res.data["status"] >= 200 && res.data["status"] < 300) {
         const successMessage =
           type === "login"
             ? "Login successful"
             : "Account created successfully";
 
-        toast?.show("success", successMessage, 201);
+        toast?.show("success", successMessage, res.data["status"]);
 
         window.localStorage.setItem("userInfo", JSON.stringify(res.data.body));
 
@@ -188,6 +190,8 @@ function SignupLoginStructure({
                   id="email"
                   placeholder="email"
                   {...register("email")}
+                  disabled={userIdLength > 0}
+                  onChange={(e) => setEmailLength(e.target.value.length)}
                 />
               </div>
               <p>{errors.email?.message?.toString()}</p>
@@ -209,7 +213,9 @@ function SignupLoginStructure({
                   type="text"
                   id="userId"
                   placeholder="userId"
+                  disabled={emailLength > 0}
                   {...register("userId")}
+                  onChange={(e) => setUserIdLength(e.target.value.length)}
                 />
               </div>
               <p>{errors.userId?.message?.toString()}</p>

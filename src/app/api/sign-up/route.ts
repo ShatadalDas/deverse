@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     if (!isValid) {
       return json({
         error: "Invalid Request Body",
-        status: 400,
+        status: 406,
       });
     }
 
@@ -76,9 +76,10 @@ export async function POST(req: NextRequest) {
           firstname: savedUser.firstname,
           lastname: savedUser.lastname,
           email: savedUser.email,
+          userId: savedUser.userId,
         },
         error: undefined,
-        status: 200,
+        status: 201,
       });
 
       response.headers.set("auth", signedJWT);

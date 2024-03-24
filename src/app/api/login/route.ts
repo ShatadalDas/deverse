@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (!isValid) {
       return json({
         error: "Invalid Request Body",
-        status: 400,
+        status: 406,
       });
     }
 
@@ -31,9 +31,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const user = await UserModel.findOne({ email: parsedReqBody.email });
+    const userWithEmail = await UserModel.findOne({ email: parsedReqBody.email });
 
-    if (!user) {
+    if (!userWithEmail) {
       return json({
         body: undefined,
         error: "Invalid Email",
@@ -41,27 +41,43 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const storedPassword = user["password"];
+    const userWithUserID = await UserModel.findOne({ userId: parsedReqBody.userId });
+
+    if (!userWithUserID) {
+      return json({
+        body: undefined,
+        error: "Invalid userId",
+        status: 400,
+      });
+    }
+
+    let storedPassword;
+    if(userWithEmail) {
+      storedPassword = userWithEmail["password"];
+    } else {
+      storedPassword = userWithUserID["password"];
+    }
+
     const decrptedPassword = cryptrObj.decrypt(storedPassword);
 
     if (parsedReqBody.password !== decrptedPassword) {
       return json({
         body: undefined,
         error: "Wrong Password",
-        status: 400,
+        status: 401,
       });
     }
 
-    const signedJWT = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    const signedJWT = jwt.sign({ _id: userWithEmail._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
 
     const response = json({
       body: {
-        _id: user._id,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
+        _id: userWithEmail._id,
+        firstname: userWithEmail.firstname,
+        lastname: userWithEmail.lastname,
+        email: userWithEmail.email,
       },
       error: undefined,
       status: 200,

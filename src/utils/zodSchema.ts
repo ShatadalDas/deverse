@@ -70,6 +70,24 @@ export const LoginUserSchema = z
     email: z.string().email({
       message: "Invalid email",
     }),
+    userId: z
+      .string()
+      .min(4, {
+        message: "userId must be atleast 4 characters",
+      })
+      .refine(
+        (data) => {
+          const regex = /^[a-zA-Z0-9_]+$/;
+          return regex.test(data);
+        },
+        {
+          message: "Invalid userId format",
+        }
+      ),
     password: z.string().min(8).max(300),
   })
-  .strict();
+  .strict()
+  .refine((data) => !(data.email.length > 0 && data.userId.length > 0), {
+    message: "Enter either email or userId",
+    path: ["userId", "email"],
+  });
