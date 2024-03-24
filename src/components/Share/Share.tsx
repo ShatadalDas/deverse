@@ -16,7 +16,7 @@ type Props = {
 
 //? https://www.reddit.com/submit?url=https://stackoverflow.com/questions/24823114/post-to-reddit-via-url&title=Post%20to%20Reddit%20via%20URL
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = process.env.DOMAIN;
 
 function Share({ postId }: Props) {
   return (

@@ -5,6 +5,7 @@ const envVariables = z
     MONGO_URI: z.string(),
     JWT_SECRET: z.string(),
     CRYPTR_SECRET: z.string(),
+    DOMAIN: z.string(),
   })
   .strict();
 

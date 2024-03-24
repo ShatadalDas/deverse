@@ -71,7 +71,7 @@ function SignupLoginStructure({
 
     try {
       const res = await axios.post(
-        `http://localhost:3000/api/${type}`,
+        `${process.env.DOMAIN}/api/${type}`,
         formData
       );
       if (res.data["status"] === 200) {
