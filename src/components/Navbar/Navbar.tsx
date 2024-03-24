@@ -31,14 +31,12 @@ function Navbar() {
     ) {
       router.push("/");
     } else if (authToken && pathname !== "/sign-up" && pathname !== "/login") {
-      const source = axios.CancelToken.source();
+
       axios
         .get("/api/auth", {
           headers: {
             Authorization: "Bearer " + authToken,
           },
-          cancelToken: source.token,
-          timeout: 2000,
         })
         .then((res) => {
           const status = res.data["status"];
@@ -68,7 +66,7 @@ function Navbar() {
 
   useEffect(() => {
     checkAuthToken();
-  }, []);
+  });
 
 
   return (
