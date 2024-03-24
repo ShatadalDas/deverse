@@ -58,7 +58,7 @@ function SignupLoginStructure({
   async function onSubmit(formData: unknown) {
     //to survive from bots
     if (phoneInp.length) {
-      console.log("Bots are not allowed to submit this form");
+      toast?.show("error", "Bots are forbidden", 403);
       return;
     }
 
@@ -70,17 +70,14 @@ function SignupLoginStructure({
     });
 
     try {
-      const res = await axios.post(
-        `/api/${type}`,
-        formData
-      );
+      const res = await axios.post(`/api/${type}`, formData);
       if (res.data["status"] === 200) {
         const successMessage =
           type === "login"
             ? "Login successful"
             : "Account created successfully";
 
-        toast?.show("success", successMessage, 200);
+        toast?.show("success", successMessage, 201);
 
         window.localStorage.setItem("userInfo", JSON.stringify(res.data.body));
 
@@ -97,16 +94,15 @@ function SignupLoginStructure({
         toast?.show("error", res.data["error"], res.data["status"]);
 
         const err = res.data["error"] as string;
-        if (err.includes("Email") || err.includes("email")) {
-          setError(
-            "email",
-            {
-              message: err,
-            },
-            {
-              shouldFocus: true,
-            }
-          );
+        if (err.toLowerCase().includes("email")) {
+          setError("email", {
+            message: err,
+          });
+        }
+        if (err.toLowerCase().includes("userid")) {
+          setError("userId", {
+            message: err,
+          });
         }
         setSubmitDisabled(false);
         inputs?.forEach((input) => {
@@ -126,12 +122,6 @@ function SignupLoginStructure({
 
   return (
     <>
-      {/* <Msg
-        open={show}
-        setOpen={setShow}
-        statusCode={toastInfo.statasCode}
-        message={toastInfo.message}
-      /> */}
       <LogoBg />
       <div className={`${styles.container} ${className}`}>
         <main className={styles.mainWrapper}>
@@ -201,6 +191,28 @@ function SignupLoginStructure({
                 />
               </div>
               <p>{errors.email?.message?.toString()}</p>
+
+              {type === "login" && <p className={styles.orWrapper}>or</p>}
+
+              <label htmlFor="userId" className="sr-only">
+                User ID
+              </label>
+              <div
+                className={
+                  (errors.userId?.message ? styles.error : "") +
+                  " " +
+                  styles.userIdWrapper
+                }
+              >
+                <span>@</span>
+                <input
+                  type="text"
+                  id="userId"
+                  placeholder="userId"
+                  {...register("userId")}
+                />
+              </div>
+              <p>{errors.userId?.message?.toString()}</p>
 
               <label htmlFor="password" className="sr-only">
                 Password

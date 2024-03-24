@@ -37,13 +37,24 @@ export async function POST(req: NextRequest) {
     if (countUserWithSameEmail > 0) {
       return json({
         error: "Email already exists",
-        status: 400,
+        status: 422,
+      });
+    }
+
+    const countUserWithSameUserId = await UserModel.countDocuments({
+      userId: parsedReqBody.userId,
+    });
+
+    if (countUserWithSameUserId > 0) {
+      return json({
+        error: "UserId already taken",
+        status: 422,
       });
     }
 
     const user = new UserModel<UserModelType>({
       ...parsedReqBody,
-      userId: parsedReqBody.email.split("@")[0],
+      userId: parsedReqBody.userId,
       password: cryptrObj.encrypt(parsedReqBody.password),
     });
     const savedUser = await user.save();

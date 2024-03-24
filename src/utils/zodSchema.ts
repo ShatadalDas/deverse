@@ -16,7 +16,7 @@ export const SignUpUserSchema = z
       }),
     lastname: z
       .string()
-      .min(3, {
+      .min(1, {
         message: "lastname can't be less than 1 letters",
       })
       .max(50, {
@@ -28,8 +28,36 @@ export const SignUpUserSchema = z
     email: z.string().email({
       message: "Invalid email",
     }),
-    password: z.string().min(8).max(100),
-    confirmPassword: z.string().min(8).max(100),
+    userId: z
+      .string()
+      .min(4, {
+        message: "userId must be atleast 4 characters",
+      })
+      .refine(
+        (data) => {
+          const regex = /^[a-zA-Z0-9_]+$/;
+          return regex.test(data);
+        },
+        {
+          message: "Invalid userId format",
+        }
+      ),
+    password: z
+      .string()
+      .min(8, {
+        message: "Password must contain atleast 8 characters",
+      })
+      .max(100, {
+        message: "Password can't be more than 100 characters",
+      }),
+    confirmPassword: z
+      .string()
+      .min(8, {
+        message: "Confirm password must contain atleast 8 characters",
+      })
+      .max(100, {
+        message: "Confirm password can't be more than 100 characters",
+      }),
   })
   .strict()
   .refine((data) => data.password === data.confirmPassword, {

@@ -7,11 +7,21 @@ import cameraIcon from "@/assets/camera-icon.svg";
 import logoutIcon from "@/assets/logout-icon.svg";
 import { useState } from "react";
 import editIcon from "@/assets/edit-icon-2.svg";
-
-
+import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
+import { useToast } from "@/hooks";
 
 function ProfileImageSection() {
   const [fullName, setFullName] = useState("John Doe");
+  const router = useRouter();
+  const cookie = useCookies();
+  const toast = useToast();
+
+  function handleLogout() {
+    cookie.remove("auth");
+    toast?.show("success", "Logged out successfully", 200);
+    router.push("/sign-up");
+  }
 
   return (
     <section className={styles.profileImageSection}>
@@ -42,9 +52,9 @@ function ProfileImageSection() {
 
         <div className={styles.useridWrapper}>
           <p className={styles.userid}>{"@johndoe123"}</p>
-          <Link href={"/"}>
+          <button onClick={handleLogout}>
             <Image src={logoutIcon} alt="" />
-          </Link>
+          </button>
         </div>
       </div>
     </section>
