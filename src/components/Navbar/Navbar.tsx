@@ -21,6 +21,7 @@ function Navbar() {
 
   function checkAuthToken() {
     const authToken = cookies.get("auth");
+
     if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
       toast?.show("error", "Please login first!", 401);
       router.push("/login");
@@ -31,14 +32,13 @@ function Navbar() {
       router.push("/");
     } else if (authToken) {
       const source = axios.CancelToken.source();
-
       axios
         .get("/api/auth", {
           headers: {
             Authorization: "Bearer " + authToken,
           },
           cancelToken: source.token,
-          timeout: 900,
+          timeout: 2000,
         })
         .then((res) => {
           const status = res.data["status"];
@@ -66,7 +66,7 @@ function Navbar() {
 
   setInterval(() => {
     checkAuthToken();
-  }, 1 * 60 * 1000); // 1 mins
+  }, 2.5 * 60 * 1000); // 2.5 mins
 
   useEffect(() => {
     checkAuthToken();
