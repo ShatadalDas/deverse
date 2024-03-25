@@ -19,51 +19,51 @@ function Navbar() {
   const pathname = usePathname();
   const toast = useToast();
 
-  function checkAuthToken() {
-    const authToken = cookies.get("auth");
-
-    if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
-      toast?.show("error", "Please login first!", 401);
-      router.push("/login");
-      return;
-    }
-    if (authToken && (pathname === "/sign-up" || pathname === "/login")) {
-      router.push("/");
-      return;
-    }
-
-    if (authToken) {
-      axios
-        .get("/api/auth", {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        })
-        .then((res) => {
-          if (res.data["status"] === 200) return;
-
-          if (res.data["status"] === 500) {
-            toast?.show("error", "Oops, Something went wrong!", 500);
-            return;
-          } else if (parseInt(res.data["status"]) !== 200) {
-            toast?.show(
-              "error",
-              "Invalid User, PLease login again",
-              res.data["status"]
-            );
-            cookies.remove("auth");
-            router.push("/login");
-            return;
-          }
-        })
-        .catch((e: AxiosError) => {
-          toast?.show("error", "Internal Server Error", 500);
-          console.log(e.message);
-        });
-    }
-  }
-
   useEffect(() => {
+    function checkAuthToken() {
+      const authToken = cookies.get("auth");
+
+      if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
+        toast?.show("error", "Please login first!", 401);
+        router.push("/login");
+        return;
+      }
+      if (authToken && (pathname === "/sign-up" || pathname === "/login")) {
+        router.push("/");
+        return;
+      }
+
+      if (authToken) {
+        axios
+          .get("/api/auth", {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          })
+          .then((res) => {
+            if (res.data["status"] === 200) return;
+
+            if (res.data["status"] === 500) {
+              console.log(res.data);
+              toast?.show("error", "Oops, Something went wrong!", 500);
+              return;
+            } else if (res.data["status"] !== 200) {
+              toast?.show(
+                "error",
+                "Invalid User, PLease login again",
+                res.data["status"]
+              );
+              cookies.remove("auth");
+              router.push("/login");
+              return;
+            }
+          })
+          .catch((e: AxiosError) => {
+            console.log("error: ", e.message);
+            toast?.show("error", "Internal Server Error", 500);
+          });
+      }
+    }
     checkAuthToken();
 
     const intervalId = setInterval(() => {
