@@ -25,7 +25,6 @@ export async function GET(req: NextRequest) {
       ) as JwtPayload;
 
       _id = jwtObj["_id"];
-
     } catch (e: any) {
       console.log(e.message);
 
@@ -55,6 +54,7 @@ export async function GET(req: NextRequest) {
         status: 400,
       });
     }
+
 
     return json({
       body: {

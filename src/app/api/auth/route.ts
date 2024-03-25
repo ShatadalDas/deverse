@@ -47,6 +47,8 @@ export async function GET(req: NextRequest) {
       });
     }
 
+    console.log("User Authenticated!");
+
     return json({
       body: {
         firstname: user.firstname,

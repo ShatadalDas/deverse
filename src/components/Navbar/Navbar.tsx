@@ -40,8 +40,11 @@ function Navbar() {
           },
         })
         .then((res) => {
-          if (parseInt(res.data["status"]) === 500) {
+          if (res.data["status"] === 200) return;
+
+          if (res.data["status"] === 500) {
             toast?.show("error", "Oops, Something went wrong!", 500);
+            return;
           } else if (parseInt(res.data["status"]) !== 200) {
             toast?.show(
               "error",
@@ -50,6 +53,7 @@ function Navbar() {
             );
             cookies.remove("auth");
             router.push("/login");
+            return;
           }
         })
         .catch((e: AxiosError) => {
