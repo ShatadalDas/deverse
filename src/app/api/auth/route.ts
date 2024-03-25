@@ -5,9 +5,9 @@ import UserModel from "../db/models/UserModel";
 import conn from "../db/conn";
 
 export async function GET(req: NextRequest) {
-  try {
-    const authToken = req.headers.get("authorization")?.split(" ")[1];
+  const authToken = req.headers.get("authorization")?.split(" ")[1];
 
+  try {
     if (!authToken) {
       return json({
         body: undefined,
