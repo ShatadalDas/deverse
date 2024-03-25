@@ -10,6 +10,7 @@ export async function GET(req: NextRequest) {
 
     if (!authToken) {
       return json({
+        body: undefined,
         error: "Auth Token Not Provided",
         status: 400,
       });
@@ -39,6 +40,7 @@ export async function GET(req: NextRequest) {
 
     if (!dbConnected) {
       return json({
+        body: undefined,
         error: "Unable to connect to database",
         status: 500,
       });

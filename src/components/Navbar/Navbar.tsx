@@ -25,49 +25,49 @@ function Navbar() {
     if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
       toast?.show("error", "Please login first!", 401);
       router.push("/login");
-    } else if (
-      authToken &&
-      (pathname === "/sign-up" || pathname === "/login")
-    ) {
+      return;
+    }
+    if (authToken && (pathname === "/sign-up" || pathname === "/login")) {
       router.push("/");
-    } else if (authToken && pathname !== "/sign-up" && pathname !== "/login") {
+      return;
+    }
 
+    if (authToken) {
       axios
         .get("/api/auth", {
           headers: {
-            Authorization: "Bearer " + authToken,
+            Authorization: `Bearer ${authToken}`,
           },
         })
         .then((res) => {
-          const status = res.data["status"];
-
-          if (parseInt(status) >= 400) {
-            toast?.show("error", res.data["error"], res.data["status"]);
-            console.log("Removing auth")
-            console.log(res.data)
+          if (parseInt(res.data["status"]) === 500) {
+            toast?.show("error", "Oops, Something went wrong!", 500);
+          } else if (parseInt(res.data["status"]) !== 200) {
+            toast?.show(
+              "error",
+              "Invalid User, PLease login again",
+              res.data["status"]
+            );
             cookies.remove("auth");
             router.push("/login");
           }
         })
         .catch((e: AxiosError) => {
-          if (axios.isCancel(e)) {
-            toast?.show("error", "Request timed out", 408);
-          } else {
-            toast?.show("error", "Something went wrong", 500);
-          }
+          toast?.show("error", "Internal Server Error", 500);
           console.log(e.message);
         });
     }
   }
 
-  setInterval(() => {
-    checkAuthToken();
-  }, 2.5 * 60 * 1000); // 2.5 mins
-
   useEffect(() => {
     checkAuthToken();
-  });
 
+    const intervalId = setInterval(() => {
+      checkAuthToken();
+    }, 4 * 60 * 1000); // 4 mins
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <nav
