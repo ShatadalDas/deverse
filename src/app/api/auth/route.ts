@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       return json({
         body: undefined,
         error: "Database connection failed",
-        status: 500,
+        status: 503,
       });
     }
 

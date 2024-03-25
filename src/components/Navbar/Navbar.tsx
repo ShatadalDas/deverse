@@ -28,6 +28,7 @@ function Navbar() {
         router.push("/login");
         return;
       }
+
       if (authToken && (pathname === "/sign-up" || pathname === "/login")) {
         router.push("/");
         return;
@@ -41,9 +42,11 @@ function Navbar() {
             },
           })
           .then((res) => {
-            if (res.data["status"] === 200) return;
-
-            if (res.data["status"] === 500) {
+            if (res.data["status"] === 503) {
+              console.log(res.data);
+              toast?.show("error", "Database Error", 503);
+              return;
+            } else if (res.data["status"] === 500) {
               console.log(res.data);
               toast?.show("error", "Oops, Something went wrong!", 500);
               return;
@@ -55,7 +58,6 @@ function Navbar() {
               );
               cookies.remove("auth");
               router.push("/login");
-              return;
             }
           })
           .catch((e: AxiosError) => {
