@@ -4,78 +4,15 @@ import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import Link from "next/link";
 import searchIcon from "@/assets/search-icon.png";
-import { useToast, useUniqueId } from "@/hooks";
-import { useCookies } from "next-client-cookies";
-import { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import axios, { AxiosError } from "axios";
+import { useAuth, useUniqueId } from "@/hooks";
+import { usePathname } from "next/navigation";
 
 const links = ["explore", "post", "forum", "ask", "profile"];
 
 function Navbar() {
   const uniqueId = useUniqueId();
-  const cookies = useCookies();
-  const router = useRouter();
   const pathname = usePathname();
-  const toast = useToast();
-
-  useEffect(() => {
-    function checkAuthToken() {
-      const authToken = cookies.get("auth");
-
-      if (!authToken && pathname !== "/sign-up" && pathname !== "/login") {
-        toast?.show("error", "Please login first!", 401);
-        router.push("/login");
-        return;
-      }
-
-      if (authToken && (pathname === "/sign-up" || pathname === "/login")) {
-        router.push("/");
-        return;
-      }
-
-      if (authToken) {
-        axios
-          .get("/api/auth", {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          })
-          .then((res) => {
-            if (res.data["status"] === 503) {
-              console.log(res.data);
-              toast?.show("error", "Database Error", 503);
-              return;
-            } else if (res.data["status"] === 500) {
-              console.log(res.data);
-              toast?.show("error", "Oops, Something went wrong!", 500);
-              return;
-            } else if (res.data["status"] !== 200) {
-              toast?.show(
-                "error",
-                "Invalid User, PLease login again",
-                res.data["status"]
-              );
-              cookies.remove("auth");
-              router.push("/login");
-            } else if (res.data["status"] === 200) {
-              console.log("User is authentic!");
-            }
-          })
-          .catch((e: AxiosError) => {
-            console.log("error: ", e.message);
-            toast?.show("error", "Internal Server Error", 500);
-          });
-      }
-    }
-    checkAuthToken();
-
-    const intervalId = setInterval(() => {
-      checkAuthToken();
-    }, 4 * 60 * 1000); // 4 mins
-
-    return () => clearInterval(intervalId);
-  }, []);
+  useAuth(); // authenticate user in every 4 mins
 
   return (
     <nav
