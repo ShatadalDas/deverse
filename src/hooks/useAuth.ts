@@ -1,3 +1,4 @@
+"use client";
 import { useCallback, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
@@ -59,7 +60,7 @@ function useAuth() {
 
   useEffect(() => {
     checkAuthToken();
-    
+
     const intervalId = setInterval(checkAuthToken, 4 * 60 * 1000); // 4 mins
 
     return () => clearInterval(intervalId);

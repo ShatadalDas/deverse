@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 const links = ["explore", "post", "forum", "ask", "profile"];
 
 function Navbar() {
+  useAuth(); // authenticate user in every 4 mins
   const uniqueId = useUniqueId();
   const pathname = usePathname();
-  useAuth(); // authenticate user in every 4 mins
 
   return (
     <nav
