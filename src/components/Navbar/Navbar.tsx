@@ -58,6 +58,8 @@ function Navbar() {
               );
               cookies.remove("auth");
               router.push("/login");
+            } else if (res.data["status"] === 200) {
+              console.log("User is authentic!");
             }
           })
           .catch((e: AxiosError) => {
