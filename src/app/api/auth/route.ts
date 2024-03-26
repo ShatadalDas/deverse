@@ -5,9 +5,11 @@ import UserModel from "../db/models/UserModel";
 import conn from "../db/conn";
 
 export async function GET(req: NextRequest) {
-  try {
-    const authToken = req.headers.get("Authorization")?.split(" ")[1];
+  //? don't put this inside try block
+  //? it causes bug in production
+  const authToken = req.headers.get("authorization")?.split(" ")[1];
 
+  try {
     if (!authToken) {
       return json({
         body: undefined,
