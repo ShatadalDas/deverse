@@ -8,17 +8,22 @@ type Props = {
   isVisible: boolean;
   statusCode: number;
   message: string;
-  type: "success" | "error";
+  type: "success" | "error" | "info";
 };
 
 function Toast({ isVisible, message, statusCode, type }: Props) {
   const toast = useToast();
 
   return (
-    <div
-      className={`${styles.toastWrapper} ${isVisible && styles.toastOpen} ${
-        !isVisible && styles.toastClose
-      } ${type === "success" && styles.toastSuccess} `}
+    // <div
+    //   className={`${styles.toastWrapper} ${styles.toastOpen} ${styles.toastInfo}`}
+    // >
+      <div
+      className={`${styles.toastWrapper} ${
+        isVisible ? styles.toastOpen : styles.toastClose
+      } ${type === "success" && styles.toastSuccess} ${
+        type === "info" && styles.toastInfo
+      }`}
     >
       <p className={styles.statusCode}>{statusCode}</p>
       <p className={styles.message}>{message}</p>

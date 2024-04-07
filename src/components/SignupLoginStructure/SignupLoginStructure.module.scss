@@ -99,7 +99,7 @@
         cursor: pointer;
         fill: #fff;
         fill-opacity: 0.4;
-      }  
+      }
     }
 
     &.error button svg {
@@ -118,21 +118,47 @@
         cursor: not-allowed;
       }
     }
+
+    &.forgotPasswordWrapper {
+      all: unset;
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      div {
+        all: unset;
+        display: flex;
+        justify-content: end;
+
+        & > * {
+          font-size: 0.7em;
+          translate: 0 -50%;
+          text-transform: lowercase;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          // color: #14ffed;
+          color: #bbb;
+  
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+    }
   }
   p {
     color: #f00;
     font-size: 0.7em;
     translate: 0 -50%;
   }
-  
+
   p.orWrapper {
     color: #fff6;
     font-size: 0.8em;
-    
+
     display: flex;
     justify-content: center;
     translate: 0 -50%;
-
   }
 }
 

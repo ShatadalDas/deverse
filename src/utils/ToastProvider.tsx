@@ -4,7 +4,7 @@ import { ReactNode, createContext, useState } from "react";
 
 type ToastContextType = {
   show: (
-    type: "success" | "error",
+    type: "success" | "error" | "info",
     message: string,
     statusCode: number
   ) => void;
@@ -17,10 +17,10 @@ function ToastProvider({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [statusCode, setStatusCode] = useState(400);
-  const [type, setType] = useState<"success" | "error">("error");
+  const [type, setType] = useState<"success" | "error" | "info">("error");
 
   const show = (
-    type: "success" | "error",
+    type: "success" | "error" | "info",
     message: string,
     statusCode: number
   ) => {

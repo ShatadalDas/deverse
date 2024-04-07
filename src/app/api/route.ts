@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import conn from "./db/conn";
-import UserModel from "./db/models/UserModel";
-import json from "./utils/json";
+import conn from "@/db/conn";
+import UserModel from "@/db/models/UserModel";
+import json from "@/utils/json";
 
 export async function GET(req: NextRequest) {
   try {
@@ -54,7 +54,6 @@ export async function GET(req: NextRequest) {
         status: 400,
       });
     }
-
 
     return json({
       body: {

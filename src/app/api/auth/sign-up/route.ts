@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import conn from "@/app/api/db/conn";
-import UserModel, { UserModelType } from "@/app/api/db/models/UserModel";
-import json from "@/app/api/utils/json";
-import cryptrObj from "@/app/api/utils/cryptrObj";
+import conn from "@/db/conn";
+import { UserModel, UserModelType } from "@/db/models";
+import json from "@/utils/json";
+import cryptrObj from "@/utils/cryptrObj";
 import { SignUpUserSchema as RequestBodySchema } from "@/utils/zodSchema";
+import bcryptjs from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -52,22 +53,22 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const user = new UserModel<UserModelType>({
+    const salt = bcryptjs.genSaltSync();
+
+    const userData: UserModelType = {
       ...parsedReqBody,
-      userId: parsedReqBody.userId,
-      password: cryptrObj.encrypt(parsedReqBody.password),
-    });
-    const savedUser = await user.save();
+      password: bcryptjs.hashSync(parsedReqBody.password, salt),
+    };
+
+    const savedUser = await UserModel.create(userData);
 
     if (savedUser) {
       console.log("user created with id: ", savedUser._id);
 
-      const signedJWT = jwt.sign(
-        { _id: savedUser._id },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "30d",
-        }
+      const encodedCookie = cryptrObj.encrypt(
+        JSON.stringify({
+          _id: savedUser._id,
+        })
       );
 
       const response = json({
@@ -82,7 +83,11 @@ export async function POST(req: NextRequest) {
         status: 201,
       });
 
-      response.headers.set("auth", signedJWT);
+      response.cookies.set("auth", encodedCookie, {
+        httpOnly: true,
+        secure: true,
+        expires: Date.now() + 60 * 24 * 3600000, //60 days
+      });
 
       return response;
     }

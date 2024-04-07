@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
-import conn from "@/app/api/db/conn";
-import UserModel from "@/app/api/db/models/UserModel";
-import json from "@/app/api/utils/json";
-import cryptrObj from "@/app/api/utils/cryptrObj";
+import conn from "@/db/conn";
+import { UserModel } from "@/db/models";
+import json from "@/utils/json";
+import cryptrObj from "@/utils/cryptrObj";
 import { LoginUserSchema as RequestBodySchema } from "@/utils/zodSchema";
+import bcryptjs from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {
@@ -55,11 +56,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    let storedPassword = user["password"];
+    let storedPasswordHash = user["password"];
 
-    const decrptedPassword = cryptrObj.decrypt(storedPassword);
-
-    if (parsedReqBody.password !== decrptedPassword) {
+    if (bcryptjs.compareSync(parsedReqBody.password, storedPasswordHash)) {
       return json({
         body: undefined,
         error: "Wrong Password",
@@ -67,9 +66,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const signedJWT = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    const encodedCookie = cryptrObj.encrypt(
+      JSON.stringify({
+        _id: user._id,
+      })
+    );
 
     const response = json({
       body: {
@@ -83,7 +84,11 @@ export async function POST(req: NextRequest) {
       status: 200,
     });
 
-    response.headers.set("auth", signedJWT);
+    response.cookies.set("auth", encodedCookie, {
+      httpOnly: true,
+      secure: true,
+      expires: Date.now() + 60 * 24 * 3600000, //60 days
+    });
 
     return response;
   } catch (e: any) {

@@ -27,9 +27,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # auto generated package manager files
-pnpm-lock.yaml
-yarn.lock
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
 
 # local env files
 .env*

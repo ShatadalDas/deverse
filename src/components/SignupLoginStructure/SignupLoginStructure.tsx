@@ -12,10 +12,10 @@ import microsoftIcon from "@/assets/microsoft-icon.svg";
 import { LoginUserSchema, SignUpUserSchema } from "@/utils/zodSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useCookies } from "next-client-cookies";
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useToast } from "@/hooks";
 
 type Props = {
@@ -47,9 +47,9 @@ function SignupLoginStructure({
   const formRef = useRef<HTMLFormElement>(null);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [phoneInp, setPhoneInp] = useState("");
-  const cookie = useCookies();
   const router = useRouter();
   const toast = useToast();
+  const pathname = usePathname();
 
   const [emailLength, setEmailLength] = useState(0);
   const [userIdLength, setUserIdLength] = useState(0);
@@ -73,47 +73,23 @@ function SignupLoginStructure({
 
     try {
       const res = await axios.post(`/api/auth/${type}`, formData);
-      if (res.data["status"] >= 200 && res.data["status"] < 300) {
-        const successMessage =
-          type === "login"
-            ? "Login successful"
-            : "Account created successfully";
+      console.log("Res: ", res);
+      const successMessage =
+        type === "login" ? "Login successful" : "Account created successfully";
 
-        toast?.show("success", successMessage, res.data["status"]);
+      toast?.show("success", successMessage, res.status);
 
-        window.localStorage.setItem("userInfo", JSON.stringify(res.data.body));
+      setTimeout(() => {
+        toast?.show("info", "Redirecting to /", 303);
+        if (pathname === "/") toast?.hide();
+      }, 200);
 
-        const authToken = res.headers["auth"];
-        cookie.remove("auth");
+      window.localStorage.setItem("userInfo", JSON.stringify(res.data.body));
 
-        cookie.set("auth", authToken, {
-          expires: 30, //30 days
-          secure: true,
-          sameSite: "None",
-        });
-        router.push("/");
-      } else {
-        toast?.show("error", res.data["error"], res.data["status"]);
-
-        const err = res.data["error"] as string;
-        if (err.toLowerCase().includes("email")) {
-          setError("email", {
-            message: err,
-          });
-        }
-        if (err.toLowerCase().includes("userid")) {
-          setError("userId", {
-            message: err,
-          });
-        }
-        setSubmitDisabled(false);
-        inputs?.forEach((input) => {
-          input.disabled = false;
-        });
-        console.log(res.data["error"]);
-      }
-    } catch (error) {
+      router.push("/");
+    } catch (error: any) {
       toast?.show("error", "Oops, Something went wrong!", 500);
+      console.log("Error", error);
 
       setSubmitDisabled(false);
       inputs?.forEach((input) => {
@@ -264,7 +240,14 @@ function SignupLoginStructure({
                   )}
                 </button>
               </div>
-              <p>{errors.password?.message?.toString()}</p>
+              <div className={styles.forgotPasswordWrapper}>
+                <p>{errors.password?.message?.toString()}</p>
+                {type === "login" && (
+                  <div>
+                    <Link href="/reset/password">forgot password</Link>
+                  </div>
+                )}
+              </div>
 
               {type === "sign-up" && (
                 <>

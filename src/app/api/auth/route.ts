@@ -1,28 +1,45 @@
 import { NextRequest } from "next/server";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import json from "../utils/json";
-import UserModel from "../db/models/UserModel";
-import conn from "../db/conn";
+import json from "../../../utils/json";
+import { UserModel } from "@/db/models";
+import conn from "@/db/conn";
+import cryptrObj from "@/utils/cryptrObj";
+import { NextApiRequest } from "next";
+
+/*
+ * This route checks if the auth token is valid is valid or not based on auth token
+ */
 
 export async function GET(req: NextRequest) {
-  //? don't put this inside try block
-  //? it causes bug in production
-  const authToken = req.headers.get("authorization")?.split(" ")[1];
-
   try {
+    const authToken = req.cookies.get("auth")?.value;
+    const { searchParams } = req.nextUrl;
+
+    const pathname = searchParams.get("pathname");
+
     if (!authToken) {
+      if (pathname === "login" || pathname === "sign-up") {
+        return json({
+          body: undefined,
+          error: undefined,
+          status: 202,
+        });
+      } else {
+        return json({
+          body: undefined,
+          error: "Please login first",
+          status: 401,
+        });
+      }
+    }
+
+    const decodedCookie = JSON.parse(cryptrObj.decrypt(authToken));
+    const _id = decodedCookie["_id"];
+
+    if (!_id) {
       return json({
         body: undefined,
         error: "Bad Request",
         status: 400,
-      });
-    }
-
-    if (!jwt.verify(authToken, process.env.JWT_SECRET)) {
-      return json({
-        body: undefined,
-        error: "Authorization Failed",
-        status: 401,
       });
     }
 
@@ -31,20 +48,17 @@ export async function GET(req: NextRequest) {
     if (!dbConnected) {
       return json({
         body: undefined,
-        error: "Database connection failed",
+        error: "Couldn't connect to database",
         status: 503,
       });
     }
 
-    const decodedJwt = jwt.decode(authToken) as JwtPayload;
-    const _id = decodedJwt["_id"];
+    const foundUser = await UserModel.countDocuments({ _id });
 
-    const user = await UserModel.findById(_id);
-
-    if (!user) {
+    if (!foundUser) {
       return json({
         body: undefined,
-        error: "Credentials didn't match",
+        error: "Invalid user",
         status: 404,
       });
     }
@@ -52,12 +66,7 @@ export async function GET(req: NextRequest) {
     console.log("User Authenticated!");
 
     return json({
-      body: {
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        userId: user.userId,
-      },
+      body: undefined,
       error: undefined,
       status: 200,
     });
@@ -65,7 +74,7 @@ export async function GET(req: NextRequest) {
     console.log(err.message);
     return json({
       body: undefined,
-      error: "Internal Server Error",
+      error: "Something went wrong",
       status: 500,
     });
   }

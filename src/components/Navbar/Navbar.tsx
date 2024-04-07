@@ -8,8 +8,9 @@ import { useAuth, useUniqueId } from "@/hooks";
 import { usePathname } from "next/navigation";
 
 const links = ["explore", "post", "forum", "ask", "profile"];
+const authLinks = ["/login", "/sign-up", "/reset/password"];
 
-function Navbar() {
+function Navbar() {  
   useAuth(); // authenticate user in every 4 mins
   const uniqueId = useUniqueId();
   const pathname = usePathname();
@@ -18,9 +19,7 @@ function Navbar() {
     <nav
       className={`${styles.navbar} ${
         pathname === "/profile" ? styles.profileNav : ""
-      } ${
-        pathname === "/sign-up" || pathname === "/login" ? styles.middleNav : ""
-      }`}
+      } ${authLinks.includes(pathname) && styles.middleNav}`}
     >
       <h1 className={styles.logoWrapper}>
         <Image
@@ -33,9 +32,7 @@ function Navbar() {
         />
         <p className={styles.logoText}>Deverse</p>
       </h1>
-      {pathname === "/sign-up" || pathname === "/login" ? (
-        <></>
-      ) : (
+      {!authLinks.includes(pathname) && (
         <ul className={styles.linkWrapper}>
           <li className={styles.searchWrapper}>
             <Image src={searchIcon} alt="" className={styles.searchIcon} />

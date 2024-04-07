@@ -37,6 +37,11 @@
   outline: 0.1px solid hsla(120, 100%, 50%, 0.7);
 }
 
+.toastInfo {
+  --toast-clr: hsl(215, 100%, 42%);
+  outline: 0.1px solid hsla(215, 100%, 50%, 0.7);
+}
+
 .statusCode {
   font-family: var(--libre-franklin);
   font-weight: 700;

@@ -98,7 +98,14 @@ export const LoginUserSchema = z
           message: "Invalid userId format",
         }
       ),
-    password: z.string().min(8).max(300),
+    password: z
+      .string()
+      .min(8, {
+        message: "Password must contain atleast 8 characters",
+      })
+      .max(100, {
+        message: "Password can't be more than 100 characters",
+      }),
   })
   .strict()
   .refine((data) => !(data.email && data.userId), {

@@ -3,68 +3,90 @@ import { useCallback, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 import { useToast } from "@/hooks";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 function useAuth() {
-  const cookies = useCookies();
   const router = useRouter();
   const pathname = usePathname();
   const toast = useToast();
+  const cookies = useCookies();
 
-  const checkAuthToken = useCallback(async () => {
-    const authToken = cookies.get("auth");
+  const checkAuthToken = useCallback(async (signal: AbortSignal) => {
+    // if(!document || !document.cookie) return;
 
-    if (!authToken) {
-      // User not logged in
-      // And trying to access other pages
-      if (pathname !== "/sign-up" && pathname !== "/login") {
-        toast?.show("error", "Please login first!", 401);
-        router.push("/login");
-      }
-      return;
-    }
+    // const authToken = document.cookie.split("auth=")[1];
+    // console.log(document, authToken)
+
+    // if (!authToken) {
+    //   // User not logged in
+    //   // And trying to access other pages
+    //   if (pathname !== "/sign-up" && pathname !== "/login") {
+    //     toast?.show("error", "Please login first!", 401);
+    //     router.push("/login");
+    //   }
+
+    //   return;
+    // }
 
     // User is logged in
     // And trying to access sign-up and login pages
-    if (pathname === "/sign-up" || pathname === "/login") {
-      router.push("/");
-      return;
-    }
 
-    try {
-      const res = await axios.get("/api/auth", {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-
-      if (res.status === 200) {
+    axios
+      .get(`/api/auth?pathname=${pathname.split("/")[1]}`, {
+        signal,
+        timeout: 2000,
+      })
+      .then((res) => {
         console.log("User is authentic!");
-      } else if (res.data["status"] === 500) {
-        toast?.show("error", "Oops, Something went wrong", 500);
-      } else {
-        console.error("Authentication Error:", res.data["error"]);
+        if (
+          (res.status !== 202 && pathname === "/sign-up") ||
+          pathname === "/login"
+        ) {
+          toast?.show("info", "Already logged in!", 301);
+          router.push("/");
+          return;
+        }
+      })
+      .catch((err: AxiosError) => {
+        if (err.message === "canceled") return;
+
+        const obj = err.response?.data as {
+          body?: Record<string, unknown>;
+          error?: string;
+          status: number;
+        };
+
+        if (
+          obj?.status === 401 &&
+          pathname !== "/sign-up" &&
+          pathname !== "/login"
+        ) {
+          toast?.show("error", obj?.error || "", 401);
+          router.push("/login");
+          return;
+        }
+
+        console.log(err.message);
+
         toast?.show(
           "error",
-          "Invalid User. Please login again",
-          res.data["status"]
+          obj?.error || "Internal Server Error",
+          obj?.status || 500
         );
-        cookies.remove("auth");
-        router.push("/login");
-      }
-    } catch (err: any) {
-      console.error("Error fetching auth status:", err.message);
-      toast?.show("error", "Internal Server Error", 500);
-    }
-  }, [cookies, pathname, router, toast]);
+      });
+  }, []);
 
   useEffect(() => {
-    checkAuthToken();
+    const controller = new AbortController();
+    checkAuthToken(controller.signal);
 
-    const intervalId = setInterval(checkAuthToken, 4 * 60 * 1000); // 4 mins
+    const intervalId = setInterval(checkAuthToken, 2 * 60 * 1000); // 2 min
 
-    return () => clearInterval(intervalId);
-  }, [checkAuthToken]);
+    return () => {
+      clearInterval(intervalId);
+      controller.abort();
+    };
+  }, []);
 }
 
 export default useAuth;
