@@ -1,9 +1,8 @@
 import { NextRequest } from "next/server";
-import json from "../../../utils/json";
+import json from "@/utils/json";
 import { UserModel } from "@/db/models";
 import conn from "@/db/conn";
 import cryptrObj from "@/utils/cryptrObj";
-import { NextApiRequest } from "next";
 
 /*
  * This route checks if the auth token is valid is valid or not based on auth token
@@ -71,7 +70,7 @@ export async function GET(req: NextRequest) {
       status: 200,
     });
   } catch (err: any) {
-    console.log(err.message);
+    console.log("Error: ", err.message);
     return json({
       body: undefined,
       error: "Something went wrong",

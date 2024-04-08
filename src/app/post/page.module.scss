@@ -39,6 +39,28 @@
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 0.3rem;
+  
+  &.error {
+    textarea {
+      color: rgb(255, 71, 71);
+      outline: 1px solid red;
+    }
+
+    label::after, textarea::placeholder {
+      color: rgb(255, 71, 71);
+    }
+  }
+
+  
+  label::after {
+    content: attr(data-error-msg);
+    margin-left: 1em;
+    font-size: 0.6em;
+    text-transform: lowercase;
+    letter-spacing: 0.03em;
+    font-weight: 300;
+    font-family: var(--libre-franklin);
+  }
 }
 
 .buttonWrapper {
@@ -82,16 +104,22 @@
 
 .codeWrapper {
   max-height: fit-content;
-}
 
-.codeWrapper label {
-  position: relative;
-  width: fit-content;
-}
+  & label {
+    position: relative;
+    width: fit-content;
+  }
 
-.codeWrapper > div {
-  border-radius: 0.5em;
-  overflow: hidden;
-  padding-block-start: 1rem;
-  background-color: #1e1e1e;
+  & > div {
+    border-radius: 0.5em;
+    overflow: hidden;
+    padding-block-start: 1rem;
+    background-color: #1e1e1e;
+  }
+
+  &.error {
+    & > div {
+      outline: 1px solid red;
+    }
+  }
 }

@@ -36,7 +36,6 @@ function SignupLoginStructure({
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(
@@ -57,7 +56,7 @@ function SignupLoginStructure({
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   //this function will be called only when the formData is of valid shape for the respective routes
-  async function onSubmit(formData: unknown) {
+  async function onSubmit(formData: any) {
     //to survive from bots
     if (phoneInp.length) {
       toast?.show("error", "Bots are forbidden", 403);

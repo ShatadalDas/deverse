@@ -89,8 +89,7 @@ export const LoginUserSchema = z
       .refine(
         (data) => {
           if (data) {
-            const regex = /^[a-zA-Z0-9_]+$/;
-            return regex.test(data);
+            return /^[a-zA-Z0-9_]+$/.test(data);
           }
           return true;
         },
@@ -112,3 +111,37 @@ export const LoginUserSchema = z
     message: "Enter either email or userId",
     path: ["userId", "email"],
   });
+
+export const PostSchema = z.object({
+  code: z.string({
+    required_error: "required",
+  }),
+  description: z.string().min(1, {
+    message: "required",
+  }),
+  language: z.string().min(1, {
+    message: "language required",
+  }),
+  hashtags: z
+    .string()
+    .min(1, {
+      message: "required",
+    })
+    .refine(
+      (data) => {
+        let isOk = true;
+        data
+          ?.replace(/\s+/g, " ")
+          .trim()
+          .split(" ")
+          .forEach((hashtag) => {
+            if (!isOk) return;
+            isOk = /^#[a-zA-Z0-9_]+$/.test(hashtag);
+          });
+        return isOk;
+      },
+      {
+        message: "Invalid hashtag format",
+      }
+    ),
+});
