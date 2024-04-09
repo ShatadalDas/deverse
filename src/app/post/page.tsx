@@ -122,8 +122,8 @@ function Post() {
             id="select-language"
             value={languageSelected}
             className={styles.dropDownMenu}
-            onInput={(e) => setLanguageSelected(e.currentTarget.value)}
             {...register("language")}
+            onChange={(e) => setLanguageSelected(e.target.value)}
           >
             {langArr.map((lang) => (
               <option value={lang} key={uniqueId()}>
